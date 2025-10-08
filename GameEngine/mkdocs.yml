@@ -1,0 +1,13 @@
+site_name: OpenGl GameEngine Docs
+docs_dir: docs/wiki
+site_dir: docs/.site  # or wherever you want to b
+theme:
+  name: readthedocs
+markdown_extensions:
+  - admonition
+  - mdx_math
+plugins:
+  - search
+  - awesome-pages
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML

@@ -1,0 +1,1 @@
+. "/home/indy/repos/ProgrammingProjects/Networking/TCP/conan/build/Debug/generators/deactivate_conanbuildenv-debug-x86_64.sh"

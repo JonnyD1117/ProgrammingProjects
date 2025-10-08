@@ -1,0 +1,17 @@
+# ninja log v5
+2	643	1759973152141503473	tests/CMakeFiles/dsna_unit_tests.dir/list_ut.cpp.o	d63307b9de70945f
+2	567	1759973152066948411	tests/CMakeFiles/dsna_unit_tests.dir/deque_ut.cpp.o	f1c80157244bc346
+2	645	1759973152145221364	tests/CMakeFiles/dsna_unit_tests.dir/array_ut.cpp.o	18c86f04cbd0755c
+659	762	1759973152265786410	/home/indy/repos/ProgrammingProjects/DataStructures/bin/dsna_unit_tests	53598ac38b7f925c
+659	762	1759973152265786410	tests/dsna_unit_tests[1]_tests.cmake	53598ac38b7f925c
+2	659	1759973152157871894	tests/CMakeFiles/dsna_unit_tests.dir/vector_ut.cpp.o	2fbd2369c1e5ba85
+2	548	1759973152047783731	tests/CMakeFiles/dsna_unit_tests.dir/bst_ut.cpp.o	b2aeaef15db8836d
+659	762	1759973152265786410	/home/indy/repos/ProgrammingProjects/DataStructures/build/tests/dsna_unit_tests[1]_tests.cmake	53598ac38b7f925c
+2	528	1759973270861127748	tests/CMakeFiles/dsna_unit_tests.dir/bst_ut.cpp.o	b2aeaef15db8836d
+2	548	1759973270880489218	tests/CMakeFiles/dsna_unit_tests.dir/deque_ut.cpp.o	f1c80157244bc346
+2	632	1759973270963760230	tests/CMakeFiles/dsna_unit_tests.dir/array_ut.cpp.o	18c86f04cbd0755c
+2	633	1759973270965271764	tests/CMakeFiles/dsna_unit_tests.dir/list_ut.cpp.o	d63307b9de70945f
+2	645	1759973270976558507	tests/CMakeFiles/dsna_unit_tests.dir/vector_ut.cpp.o	2fbd2369c1e5ba85
+645	752	1759973271088238789	/home/indy/repos/ProgrammingProjects/DataStructures/bin/dsna_unit_tests	53598ac38b7f925c
+645	752	1759973271088238789	tests/dsna_unit_tests[1]_tests.cmake	53598ac38b7f925c
+645	752	1759973271088238789	/home/indy/repos/ProgrammingProjects/DataStructures/build/tests/dsna_unit_tests[1]_tests.cmake	53598ac38b7f925c

@@ -1,0 +1,1214 @@
+##################################################################
+#           MOS 6502 Instruction Set Configuration
+##################################################################
+
+instruction_set:
+  - opcode: 0x6d
+    mnemonic: ADC
+    mode: absolute
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, V, Z, C]
+    handler: add_with_carry
+
+  - opcode: 0x65
+    mnemonic: ADC
+    mode: zeropage
+    cycles: 3
+    page_boundry_cycles: 0
+    affects_flags: [N, V, Z, C]
+    handler: add_with_carry
+
+  - opcode: 0x69
+    mnemonic: ADC
+    mode: immediate
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, V, Z, C]
+    handler: add_with_carry
+
+  - opcode: 0x7d
+    mnemonic: ADC
+    mode: absolute_x
+    cycles: 4
+    page_boundry_cycles: 1
+    affects_flags: [N, V, Z, C]
+    handler: add_with_carry
+
+  - opcode: 0x79
+    mnemonic: ADC
+    mode: absolute_y
+    cycles: 4
+    page_boundry_cycles: 1
+    affects_flags: [N, V, Z, C]
+    handler: add_with_carry
+
+  - opcode: 0x61
+    mnemonic: ADC
+    mode: index_x
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [N, V, Z, C]
+    handler: add_with_carry
+
+  - opcode: 0x71
+    mnemonic: ADC
+    mode: index_y
+    cycles: 5
+    page_boundry_cycles: 1
+    affects_flags: [N, V, Z, C]
+    handler: add_with_carry
+
+  - opcode: 0x75
+    mnemonic: ADC
+    mode: zeropage_x
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, V, Z, C]
+    handler: add_with_carry
+
+  - opcode: 0x2d
+    mnemonic: AND
+    mode: absolute
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: logical_and
+
+  - opcode: 0x5
+    mnemonic: AND
+    mode: zeropage
+    cycles: 3
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: logical_and
+
+  - opcode: 0x29
+    mnemonic: AND
+    mode: immediate
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: logical_and
+
+  - opcode: 0x3d
+    mnemonic: AND
+    mode: absolute_x
+    cycles: 4
+    page_boundry_cycles: 1
+    affects_flags: [N, Z]
+    handler: logical_and
+
+  - opcode: 0x39
+    mnemonic: AND
+    mode: absolute_y
+    cycles: 4
+    page_boundry_cycles: 1
+    affects_flags: [N, Z]
+    handler: logical_and
+
+  - opcode: 0x21
+    mnemonic: AND
+    mode: index_x
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: logical_and
+
+  - opcode: 0x31
+    mnemonic: AND
+    mode: index_y
+    cycles: 5
+    page_boundry_cycles: 1
+    affects_flags: [N, Z]
+    handler: logical_and
+
+  - opcode: 0x35
+    mnemonic: AND
+    mode: zeropage_x
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: logical_and
+
+  - opcode: 0x0a
+    mnemonic: ASL
+    mode: accumulator
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: arithmetic_shift_left
+
+  - opcode: 0x0e
+    mnemonic: ASL
+    mode: absolute
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: arithmetic_shift_left
+
+  - opcode: 0x06
+    mnemonic: ASL
+    mode: zeropage
+    cycles: 5
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: arithmetic_shift_left
+
+  - opcode: 0x1e
+    mnemonic: ASL
+    mode: absolute_x
+    cycles: 7
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: arithmetic_shift_left
+
+  - opcode: 0x16
+    mnemonic: ASL
+    mode: zeropage_x
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: arithmetic_shift_left
+
+  - opcode: 0x90
+    mnemonic: BCC
+    mode: relative
+    cycles: 2
+    page_boundry_cycles: 2
+    affects_flags: []
+    handler: branch_on_carry_clear
+
+  - opcode: 0xB0
+    mnemonic: BCS
+    mode: relative
+    cycles: 2
+    page_boundry_cycles: 2
+    affects_flags: []
+    handler: branch_on_carry_set 
+
+  - opcode: 0xF0
+    mnemonic: BEQ
+    mode: relative
+    cycles: 2
+    page_boundry_cycles: 2
+    affects_flags: []
+    handler: branch_if_equal_to_zero
+
+  - opcode: 0x2C
+    mnemonic: BIT
+    mode: absolute
+    cycles: 4
+    page_boundry_cycles:
+    affects_flags: [Z]
+    handler: cmpr_mem_bits_with_accumulator
+
+  - opcode: 0x24
+    mnemonic: BIT
+    mode: zeropage
+    cycles: 3
+    page_boundry_cycles:
+    affects_flags: [z]
+    handler: cmpr_mem_bits_with_accumulator
+
+  - opcode: 0x30
+    mnemonic: BMI
+    mode: relative
+    cycles: 2
+    page_boundry_cycles: 2
+    affects_flags: []
+    handler: branch_on_minus
+
+  - opcode: 0xD0
+    mnemonic: BNE
+    mode: relative
+    cycles: 2
+    page_boundry_cycles: 2
+    affects_flags: []
+    handler: branch_on_not_equal_to_zero
+
+  - opcode: 0x10
+    mnemonic: BPL
+    mode: relative
+    cycles: 2
+    page_boundry_cycles: 2
+    affects_flags: []
+    handler: branch_on_plus
+
+  - opcode: 0x00
+    mnemonic: BRK
+    mode: implied
+    cycles: 7
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: break
+
+  - opcode: 0x50
+    mnemonic: BVC
+    mode: relative
+    cycles: 2
+    page_boundry_cycles: 2
+    affects_flags: []
+    handler: branch_on_overflow_clear
+
+  - opcode: 0x70
+    mnemonic: BVS
+    mode: relative
+    cycles: 2 
+    page_boundry_cycles: 2
+    affects_flags: []
+    handler: branch_on_overflow_set
+
+  - opcode: 0x18
+    mnemonic: CLC
+    mode: implied 
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: clear_carry
+
+  - opcode: 0xD8
+    mnemonic:  CLD
+    mode: implied
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: clear_decimal_flag
+
+  - opcode: 0x58
+    mnemonic: CLI
+    mode: implied
+    cycles: 2 
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: clear_interrupt_mask
+  
+  - opcode: 0xB8
+    mnemonic: CLV
+    mode: implied 
+    cycles: 2 
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: clear_overflow_flag
+
+  - opcode: 0xCD
+    mnemonic: CMP 
+    mode: absolute
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: compare_to_accumulator
+
+  - opcode: 0xC5
+    mnemonic: CMP 
+    mode: zeropage
+    cycles: 3
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: compare_to_accumulator
+
+  - opcode: 0xC9
+    mnemonic: CMP 
+    mode: immediate
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: compare_to_accumulator
+
+  - opcode: 0xDD
+    mnemonic: CMP 
+    mode: absolute_x
+    cycles: 4
+    page_boundry_cycles: 1
+    affects_flags: [N, Z, C]
+    handler: compare_to_accumulator
+
+  - opcode: 0xD9
+    mnemonic: CMP 
+    mode: absolute_y
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: compare_to_accumulator
+
+  - opcode: 0xC1
+    mnemonic: CMP 
+    mode: index_x
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: compare_to_accumulator
+
+  - opcode: 0xD1
+    mnemonic: CMP 
+    mode: index_y
+    cycles: 5
+    page_boundry_cycles: 1
+    affects_flags: [N, Z, C]
+    handler: compare_to_accumulator
+
+  - opcode: 0xD5
+    mnemonic: CMP 
+    mode: zeropage_x
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: compare_to_accumulator
+
+  - opcode: 0xEC
+    mnemonic: CPX
+    mode: absolute
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: compare_to_register_x
+
+  - opcode: 0xE4
+    mnemonic: CPX
+    mode: zeropage
+    cycles: 3
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: compare_to_register_x
+
+  - opcode: 0xE0
+    mnemonic: CPX
+    mode: immediate
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: compare_to_register_x
+
+  - opcode: 0xCC
+    mnemonic: CPY
+    mode: absolute
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: compare_to_register_y
+
+  - opcode: 0xC4
+    mnemonic: CPY
+    mode: zeropage
+    cycles: 3
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: compare_to_register_y
+
+  - opcode: 0xC0
+    mnemonic: CPXY
+    mode: immediate
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: compare_to_register_y
+
+  - opcode: 0xCE
+    mnemonic: DEC
+    mode: absolute
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: decrement
+
+  - opcode: 0xC6
+    mnemonic: DEC
+    mode: zeropage
+    cycles: 5
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: decrement
+
+  - opcode: 0xDE
+    mnemonic: DEC
+    mode: absolute_x
+    cycles: 7
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: decrement
+
+  - opcode: 0xD6
+    mnemonic: DEC
+    mode: zeropage_x
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: decrement
+
+  - opcode: 0xCA
+    mnemonic: DEX
+    mode: implied
+    cycles: 2 
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: decrement_x
+
+  - opcode: 0x88
+    mnemonic: DEY
+    mode: implied 
+    cycles: 2 
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: decrement_y
+
+  - opcode: 0x4D
+    mnemonic: EOR
+    mode: absolute
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N,Z]
+    handler: exclusive_or_with_accumulator
+
+  - opcode: 0x45
+    mnemonic: EOR
+    mode: zeropage
+    cycles: 3
+    page_boundry_cycles: 0
+    affects_flags: [N,Z]
+    handler: exclusive_or_with_accumulator
+
+  - opcode: 0x49
+    mnemonic: EOR
+    mode: immediate
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N,Z]
+    handler: exclusive_or_with_accumulator
+
+  - opcode: 0x5D
+    mnemonic: EOR
+    mode: absolute_x
+    cycles: 4
+    page_boundry_cycles: 1
+    affects_flags: [N,Z]
+    handler: exclusive_or_with_accumulator
+
+  - opcode: 0x59
+    mnemonic: EOR
+    mode: absolute_y
+    cycles: 4
+    page_boundry_cycles: 1
+    affects_flags: [N,Z]
+    handler: exclusive_or_with_accumulator
+
+  - opcode: 0x41
+    mnemonic: EOR
+    mode: index_x
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [N,Z]
+    handler: exclusive_or_with_accumulator
+
+  - opcode: 0x51
+    mnemonic: EOR
+    mode: index_y
+    cycles: 5
+    page_boundry_cycles: 1
+    affects_flags: [N,Z]
+    handler: exclusive_or_with_accumulator 
+
+  - opcode: 0x55
+    mnemonic: EOR
+    mode: zeropage_x
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N,Z]
+    handler: exclusive_or_with_accumulator
+
+  - opcode: 0xEE
+    mnemonic: INC
+    mode: absolute
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: increment_memory
+
+  - opcode: 0xE6
+    mnemonic:  INC
+    mode: zeropage
+    cycles: 5
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: increment_memory
+
+  - opcode: 0xFE
+    mnemonic: INC
+    mode: absolute_x
+    cycles: 7
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: increment_memory
+
+  - opcode: 0xF6
+    mnemonic: INC
+    mode: zeropage_x
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: increment_memory
+
+  - opcode: 0xE8
+    mnemonic: INX
+    mode: implied
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: increment_x
+
+  - opcode: 0xC8
+    mnemonic: INY
+    mode: implied
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: increment_y 
+
+  - opcode: 0x4C
+    mnemonic: JMP
+    mode: absolute
+    cycles: 3
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: jump_to_address 
+
+  - opcode: 0x6C
+    mnemonic: JMP
+    mode: indirect
+    cycles: 5
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: jump_to_address
+
+  - opcode: 0x20
+    mnemonic: JSR
+    mode: absolute
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: jump_to_subroutine
+
+  - opcode: 0xAD
+    mnemonic: LDA
+    mode: absolute
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [Z, N]
+    handler: load_accumulator
+
+  - opcode: 0xA5
+    mnemonic: LDA
+    mode: zeropage
+    cycles: 3
+    page_boundry_cycles: 0
+    affects_flags: [Z, N]
+    handler: load_accumulator
+
+  - opcode: 0xA9
+    mnemonic: LDA
+    mode: immediate
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [Z, N]
+    handler: load_accumulator
+
+  - opcode: 0xBD
+    mnemonic: LDA
+    mode: absolute_x
+    cycles: 4
+    page_boundry_cycles: 1
+    affects_flags: [Z, N]
+    handler: load_accumulator
+
+  - opcode: 0xB9
+    mnemonic: LDA
+    mode: absolute_y
+    cycles: 4
+    page_boundry_cycles: 1
+    affects_flags: [Z, N]
+    handler: load_accumulator
+
+  - opcode: 0xA1
+    mnemonic: LDA
+    mode: index_x
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [Z, N]
+    handler: load_accumulator
+
+  - opcode: 0xB1
+    mnemonic: LDA
+    mode: index_y
+    cycles: 5
+    page_boundry_cycles: 1
+    affects_flags: [Z, N]
+    handler: load_accumulator
+
+  - opcode: 0xB5
+    mnemonic: LDA
+    mode: zeropage_x
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [Z, N]
+    handler: load_accumulator
+
+  - opcode: 0xAE
+    mnemonic: LDX
+    mode: absolute
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: load_register_x
+
+  - opcode: 0xA6
+    mnemonic: LDX
+    mode: zeropage
+    cycles: 3
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: load_register_x
+
+  - opcode: 0xA2
+    mnemonic: LDX
+    mode: immediate
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: load_register_x
+
+  - opcode: 0xBE
+    mnemonic: LDX
+    mode: absolute_y
+    cycles: 4
+    page_boundry_cycles: 1
+    affects_flags: [N, Z]
+    handler: load_register_x
+
+  - opcode: 0xB6
+    mnemonic: LDX
+    mode: zeropage_y
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: load_register_x
+
+  - opcode: 0xAC
+    mnemonic: LDY
+    mode: absolute
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: load_register_y
+
+  - opcode: 0xA4
+    mnemonic: LDY
+    mode: zeropage
+    cycles: 3
+    page_boundry_cycles: 0 
+    affects_flags: [N, Z]
+    handler: load_register_y
+
+  - opcode: 0xA0
+    mnemonic: LDY
+    mode: immediate
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: load_register_y
+
+  - opcode: 0xBC
+    mnemonic: LDY
+    mode: absolute_x
+    cycles: 4
+    page_boundry_cycles: 1
+    affects_flags: [N, Z]
+    handler: load_register_y
+
+  - opcode: 0xB4
+    mnemonic: LDY
+    mode: zeropage_x
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: load_register_y
+
+
+  - opcode: 0x4A
+    mnemonic: LSR
+    mode: accumulator
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [Z, C]
+    handler: logical_shift_right
+
+  - opcode: 0x4E
+    mnemonic: LSR
+    mode: absolute
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [Z, C]
+    handler: logical_shift_right
+
+  - opcode: 0x46
+    mnemonic: LSR
+    mode: zeropage
+    cycles: 5 
+    page_boundry_cycles: 0
+    affects_flags: [Z, C]
+    handler: logical_shift_right
+
+  - opcode: 0x5E
+    mnemonic: LSR
+    mode: absolute_x
+    cycles: 7
+    page_boundry_cycles: 0
+    affects_flags: [Z, C]
+    handler: logical_shift_right
+
+  - opcode: 0x56
+    mnemonic: LSR
+    mode: zeropage_x
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [Z, C]
+    handler: logical_shift_right
+
+
+  - opcode: 0xEA
+    mnemonic: NOP
+    mode: implied
+    cycles: 2
+    page_boundry_cycles: 0 
+    affects_flags: []
+    handler: no_operation
+
+  - opcode: 0x0D
+    mnemonic: ORA
+    mode: absolute
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler:  inclusive_or_with_accumulator
+
+  - opcode: 0x05
+    mnemonic: ORA
+    mode: zeropage
+    cycles: 3
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler:  inclusive_or_with_accumulator
+
+  - opcode: 0x09
+    mnemonic: ORA
+    mode: immediate
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler:  inclusive_or_with_accumulator
+
+  - opcode: 0x1D
+    mnemonic: ORA
+    mode: absolute_x
+    cycles: 4
+    page_boundry_cycles: 1
+    affects_flags: [N, Z]
+    handler:  inclusive_or_with_accumulator
+
+  - opcode: 0x19
+    mnemonic: ORA
+    mode: absolute_y
+    cycles: 4
+    page_boundry_cycles: 1
+    affects_flags: [N, Z]
+    handler:  inclusive_or_with_accumulator
+
+  - opcode: 0x01
+    mnemonic: ORA
+    mode: index_x
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler:  inclusive_or_with_accumulator
+
+  - opcode: 0x11
+    mnemonic: ORA
+    mode: index_y
+    cycles: 5
+    page_boundry_cycles: 1
+    affects_flags: [N, Z]
+    handler:  inclusive_or_with_accumulator
+
+  - opcode: 0x15
+    mnemonic: ORA
+    mode: zeropage_x
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler:  inclusive_or_with_accumulator
+
+  - opcode: 0x48
+    mnemonic: PHA
+    mode: implied
+    cycles: 3
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: push_accumulator_onto_stack
+
+  - opcode: 0x08
+    mnemonic: PHP
+    mode: implied
+    cycles: 3
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: push_processor_status_onto_stack
+
+  - opcode: 0x68
+    mnemonic: PLA
+    mode: implied
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: pull_stack_onto_accumulator
+
+  - opcode: 0x28
+    mnemonic: PLP
+    mode: implied
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, V, B,D, I, Z, C]
+    handler: pull_processor_status_from_stack
+
+  - opcode: 0x2A
+    mnemonic: ROL
+    mode: accumulator
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: rotate_left_one_bit
+
+  - opcode: 0x2E
+    mnemonic: ROL
+    mode: absolute
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: rotate_left_one_bit
+
+  - opcode: 0x26
+    mnemonic: ROL
+    mode: zeropage
+    cycles: 5
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: rotate_left_one_bit
+
+  - opcode: 0x3E
+    mnemonic: ROL
+    mode: absolute_x
+    cycles: 7
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: rotate_left_one_bit
+
+  - opcode: 0x36
+    mnemonic: ROL
+    mode: zeropage_x
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: rotate_left_one_bit
+
+  - opcode: 0x6A
+    mnemonic: ROR
+    mode: accumulator
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: rotate_right_one_bit
+
+  - opcode: 0x6E
+    mnemonic: ROR
+    mode: absolute
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: rotate_right_one_bit
+
+  - opcode: 0x66
+    mnemonic: ROR
+    mode: zeropage
+    cycles: 5
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: rotate_right_one_bit
+
+  - opcode: 0x7E
+    mnemonic: ROR
+    mode: absolute_x
+    cycles: 7
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: rotate_right_one_bit
+
+  - opcode: 0x76
+    mnemonic: ROR
+    mode: zeropage_x
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: rotate_right_one_bit
+
+  - opcode: 0x40
+    mnemonic: RTI
+    mode: implied
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [N,V,B,D,I,Z,C]
+    handler: return_from_interrupt
+
+  - opcode: 0x60
+    mnemonic: RTS
+    mode: implied
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: return_from_subroutine
+
+  - opcode: 0xED
+    mnemonic: SBC
+    mode: absolute
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, V, Z, C]
+    handler: subtract_with_carry
+
+  - opcode: 0xE5
+    mnemonic: SBC
+    mode: zeropage
+    cycles: 3
+    page_boundry_cycles: 0
+    affects_flags: [N, V, Z, C]
+    handler: subtract_with_carry
+
+  - opcode: 0xE9
+    mnemonic: SBC
+    mode: immediate
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, V, Z, C]
+    handler: subtract_with_carry
+
+  - opcode: 0xFD
+    mnemonic: SBC
+    mode: absolute_x
+    cycles: 4
+    page_boundry_cycles: 1
+    affects_flags: [N, V, Z, C]
+    handler: subtract_with_carry
+
+  - opcode: 0xF9
+    mnemonic: SBC
+    mode: absolute_y
+    cycles: 4
+    page_boundry_cycles: 1
+    affects_flags: [N, V, Z, C]
+    handler: subtract_with_carry
+
+  - opcode: 0xE1
+    mnemonic: SBC
+    mode: index_x
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [N, V, Z, C]
+    handler: subtract_with_carry
+
+  - opcode: 0xF1
+    mnemonic: SBC
+    mode: index_y
+    cycles: 5
+    page_boundry_cycles: 1
+    affects_flags: [N, V, Z, C]
+    handler: subtract_with_carry
+
+  - opcode: 0xF5
+    mnemonic: SBC
+    mode: zeropage_x
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, V, Z, C]
+    handler: subtract_with_carry
+
+  - opcode: 0x38
+    mnemonic: SEC
+    mode: implied
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [C]
+    handler: set_carry
+
+  - opcode: 0xF8
+    mnemonic: SED
+    mode: implied
+    cycles: 2 
+    page_boundry_cycles: 0
+    affects_flags: [D]
+    handler: set_decimal_mode
+
+  - opcode: 0x78
+    mnemonic: SEI
+    mode: implied
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [I]
+    handler: set_interrupt_disable 
+
+  - opcode: 0x8D
+    mnemonic: STA 
+    mode: absolute
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: store_accumulator_in_memory
+
+  - opcode: 0x85
+    mnemonic: STA 
+    mode: zeropage
+    cycles: 3
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: store_accumulator_in_memory
+
+  - opcode: 0x9D
+    mnemonic: STA 
+    mode: absolute_x
+    cycles: 5
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: store_accumulator_in_memory
+
+  - opcode: 0x99
+    mnemonic: STA 
+    mode: absolute_y
+    cycles: 5
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: store_accumulator_in_memory
+
+  - opcode: 0x81
+    mnemonic: STA 
+    mode: index_x
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: store_accumulator_in_memory
+
+  - opcode: 0x91
+    mnemonic: STA 
+    mode: index_y
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: store_accumulator_in_memory
+
+  - opcode: 0x95
+    mnemonic: STA 
+    mode: zeropage_x
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: store_accumulator_in_memory
+
+  - opcode: 0x8E
+    mnemonic: STX
+    mode: absolute
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: store_x_in_memory
+
+  - opcode: 0x86
+    mnemonic: STX
+    mode: zeropage
+    cycles: 3
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: store_x_in_memory
+
+  - opcode: 0x96
+    mnemonic: STX
+    mode: zeropage_y
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: store_x_in_memory
+
+  - opcode: 0x8C
+    mnemonic: STY
+    mode: absolute
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: store_y_in_memory
+
+  - opcode: 0x84
+    mnemonic: STY
+    mode: zeropage
+    cycles: 3
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: store_y_in_memory
+
+  - opcode: 0x94
+    mnemonic: STY
+    mode: zeropage_x
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: store_y_in_memory
+
+  - opcode: 0xAA
+    mnemonic: TAX
+    mode: implied
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: transfer_accumulator_into_x
+
+  - opcode: 0xA8
+    mnemonic: TAY
+    mode: implied
+    cycles: 2 
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: transfer_accumulator_into_y
+
+  - opcode: 0xBA
+    mnemonic: TSX
+    mode: implied
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: transfer_s_into_x
+
+  - opcode: 0x8A
+    mnemonic: TXA
+    mode: implied
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: transfer_x_into_accumulator
+
+  - opcode: 0x9A
+    mnemonic: TXS
+    mode: implied
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: transfer_x_into_s
+
+  - opcode: 0x98
+    mnemonic: TYA
+    mode: implied
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: transfer_y_into_accumulator

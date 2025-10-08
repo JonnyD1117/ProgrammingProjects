@@ -1,0 +1,16 @@
+[requires]
+opengl/system
+glfw/3.4
+glad/0.1.36
+glm/1.0.1
+jsoncpp/1.9.6
+eigen/3.4.0
+gtest/1.16.0
+xorg/system
+stb/cci.20230920
+assimp/5.4.3
+[generators]
+CMakeDeps
+CMakeToolchain
+[layout]
+cmake_layout

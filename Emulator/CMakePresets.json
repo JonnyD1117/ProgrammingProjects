@@ -1,0 +1,55 @@
+{
+    "version": 4,
+    "cmakeMinimumRequired": {
+      "major": 3,
+      "minor": 28,
+      "patch": 0
+    },
+    "configurePresets": [
+      {
+        "name": "default",
+        "displayName": "Default (Release)",
+        "description": "Use Conan toolchain and Release build type",
+        "generator": "Ninja",
+        "binaryDir": "${sourceDir}/build",
+        "cacheVariables": {
+          "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/conan/build/Release/generators/conan_toolchain.cmake",
+          "CMAKE_BUILD_TYPE": "Release",
+          "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/bin",
+          "CMAKE_CXX_COMPILER": "clang++",
+          "CMAKE_CXX_STANDARD": "23",
+          "CMAKE_EXPORT_COMPILE_COMMANDS" : "ON"
+        }
+      },
+      {
+        "name": "debug",
+        "displayName": "Debug ",
+        "description": "Use Conan toolchain and Debug build type",
+        "generator": "Ninja",
+        "binaryDir": "${sourceDir}/build",
+        "cacheVariables": {
+          "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/conan/build/Debug/generators/conan_toolchain.cmake",
+          "CMAKE_BUILD_TYPE": "Debug",
+          "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/bin",
+          "CMAKE_CXX_COMPILER": "clang++",
+          "CMAKE_CXX_STANDARD": "23",
+          "CMAKE_EXPORT_COMPILE_COMMANDS" : "ON"
+        }
+      }
+    ],
+    "buildPresets": [
+      {
+        "name": "default",
+        "configurePreset": "default"
+      },
+      {
+        "name": "debug",
+        "configurePreset": "debug"
+      },
+      {
+        "name": "test",
+        "configurePreset": "default"
+      }
+    ]
+  }
+  

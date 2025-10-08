@@ -1,0 +1,20 @@
+[
+{
+  "directory": "/home/indy/repos/ProgrammingProjects/Networking/TCP/build",
+  "command": "/usr/bin/clang++ -I/home/indy/repos/ProgrammingProjects/Networking/TCP/src -fdiagnostics-color=always -g -std=gnu++17 -o tests/CMakeFiles/test_tcp_client.dir/test_tcp_client.cpp.o -c /home/indy/repos/ProgrammingProjects/Networking/TCP/tests/test_tcp_client.cpp",
+  "file": "/home/indy/repos/ProgrammingProjects/Networking/TCP/tests/test_tcp_client.cpp",
+  "output": "tests/CMakeFiles/test_tcp_client.dir/test_tcp_client.cpp.o"
+},
+{
+  "directory": "/home/indy/repos/ProgrammingProjects/Networking/TCP/build",
+  "command": "/usr/bin/clang++ -I/home/indy/repos/ProgrammingProjects/Networking/TCP/src -fdiagnostics-color=always -g -std=gnu++17 -o tests/CMakeFiles/test_tcp_server.dir/test_tcp_server.cpp.o -c /home/indy/repos/ProgrammingProjects/Networking/TCP/tests/test_tcp_server.cpp",
+  "file": "/home/indy/repos/ProgrammingProjects/Networking/TCP/tests/test_tcp_server.cpp",
+  "output": "tests/CMakeFiles/test_tcp_server.dir/test_tcp_server.cpp.o"
+},
+{
+  "directory": "/home/indy/repos/ProgrammingProjects/Networking/TCP/build",
+  "command": "/usr/bin/clang++ -I/home/indy/repos/ProgrammingProjects/Networking/TCP/src -fdiagnostics-color=always -g -std=gnu++17 -o tests/CMakeFiles/test_get_google_homepage.dir/test_get_google_homepage.cpp.o -c /home/indy/repos/ProgrammingProjects/Networking/TCP/tests/test_get_google_homepage.cpp",
+  "file": "/home/indy/repos/ProgrammingProjects/Networking/TCP/tests/test_get_google_homepage.cpp",
+  "output": "tests/CMakeFiles/test_get_google_homepage.dir/test_get_google_homepage.cpp.o"
+}
+]

@@ -1,0 +1,1 @@
+. "/home/indy/repos/ProgrammingProjects/Networking/TCP/conan/build/Debug/generators/conanrunenv-debug-x86_64.sh"

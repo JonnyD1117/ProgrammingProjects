@@ -1,0 +1,9 @@
+
+
+namespace HTTP
+{
+    class ResponseParser
+    {
+        
+    };
+}

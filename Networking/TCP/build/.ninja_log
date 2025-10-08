@@ -1,0 +1,13 @@
+# ninja log v5
+736	782	1759974035706068026	/home/indy/repos/ProgrammingProjects/Networking/TCP/bin/test_get_google_homepage	135e9313d0d2fd34
+736	782	1759974035706485304	/home/indy/repos/ProgrammingProjects/Networking/TCP/bin/test_tcp_server	5da2438a19212a68
+736	781	1759974035706446931	/home/indy/repos/ProgrammingProjects/Networking/TCP/bin/test_tcp_client	c6c1d106ebe41659
+1	736	1759974035654571223	tests/CMakeFiles/test_get_google_homepage.dir/test_get_google_homepage.cpp.o	b50b450d18530e54
+1	736	1759974035654571223	tests/CMakeFiles/test_tcp_client.dir/test_tcp_client.cpp.o	8b07c80f0531e84
+1	735	1759974035654173673	tests/CMakeFiles/test_tcp_server.dir/test_tcp_server.cpp.o	380b2eead615f0ba
+2	737	1759974074780390155	tests/CMakeFiles/test_tcp_client.dir/test_tcp_client.cpp.o	8b07c80f0531e84
+2	748	1759974074791002249	tests/CMakeFiles/test_tcp_server.dir/test_tcp_server.cpp.o	380b2eead615f0ba
+2	750	1759974074793422469	tests/CMakeFiles/test_get_google_homepage.dir/test_get_google_homepage.cpp.o	b50b450d18530e54
+737	785	1759974074833426333	/home/indy/repos/ProgrammingProjects/Networking/TCP/bin/test_tcp_client	c6c1d106ebe41659
+748	792	1759974074841147149	/home/indy/repos/ProgrammingProjects/Networking/TCP/bin/test_tcp_server	5da2438a19212a68
+750	793	1759974074841671629	/home/indy/repos/ProgrammingProjects/Networking/TCP/bin/test_get_google_homepage	135e9313d0d2fd34

@@ -1,0 +1,12 @@
+/home/indy/repos/ProgrammingProjects/Networking/TCP/build/CMakeFiles/test.dir
+/home/indy/repos/ProgrammingProjects/Networking/TCP/build/CMakeFiles/edit_cache.dir
+/home/indy/repos/ProgrammingProjects/Networking/TCP/build/CMakeFiles/rebuild_cache.dir
+/home/indy/repos/ProgrammingProjects/Networking/TCP/build/src/CMakeFiles/test.dir
+/home/indy/repos/ProgrammingProjects/Networking/TCP/build/src/CMakeFiles/edit_cache.dir
+/home/indy/repos/ProgrammingProjects/Networking/TCP/build/src/CMakeFiles/rebuild_cache.dir
+/home/indy/repos/ProgrammingProjects/Networking/TCP/build/tests/CMakeFiles/test_tcp_client.dir
+/home/indy/repos/ProgrammingProjects/Networking/TCP/build/tests/CMakeFiles/test_tcp_server.dir
+/home/indy/repos/ProgrammingProjects/Networking/TCP/build/tests/CMakeFiles/test_get_google_homepage.dir
+/home/indy/repos/ProgrammingProjects/Networking/TCP/build/tests/CMakeFiles/test.dir
+/home/indy/repos/ProgrammingProjects/Networking/TCP/build/tests/CMakeFiles/edit_cache.dir
+/home/indy/repos/ProgrammingProjects/Networking/TCP/build/tests/CMakeFiles/rebuild_cache.dir

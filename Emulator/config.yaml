@@ -1,0 +1,191 @@
+##################################################################
+#           MOS 6502 Instruction Set Configuration
+##################################################################
+
+instruction_set:
+  # ADD WITH CARRY
+  - opcode: 0x6d
+    mnemonic: ADC
+    mode: absolute
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, V, Z, C]
+    handler: add_with_carry
+
+  - opcode: 0x65
+    mnemonic: ADC
+    mode: zeropage
+    cycles: 3
+    page_boundry_cycles: 0
+    affects_flags: [N, V, Z, C]
+    handler: add_with_carry
+
+  - opcode: 0x69
+    mnemonic: ADC
+    mode: immediate
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, V, Z, C]
+    handler: add_with_carry
+
+  - opcode: 0x7d
+    mnemonic: ADC
+    mode: absolute_x
+    cycles: 4
+    page_boundry_cycles: 1
+    affects_flags: [N, V, Z, C]
+    handler: add_with_carry
+
+  - opcode: 0x79
+    mnemonic: ADC
+    mode: absolute_y
+    cycles: 4
+    page_boundry_cycles: 1
+    affects_flags: [N, V, Z, C]
+    handler: add_with_carry
+
+  - opcode: 0x61
+    mnemonic: ADC
+    mode: index_x
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [N, V, Z, C]
+    handler: add_with_carry
+
+  - opcode: 0x71
+    mnemonic: ADC
+    mode: index_y
+    cycles: 5
+    page_boundry_cycles: 1
+    affects_flags: [N, V, Z, C]
+    handler: add_with_carry
+
+  - opcode: 0x75
+    mnemonic: ADC
+    mode: zeropage_x
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, V, Z, C]
+    handler: add_with_carry
+
+  # Logical AND
+  - opcode: 0x2d
+    mnemonic: AND
+    mode: absolute
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: logical_and
+
+  - opcode: 0x5
+    mnemonic: AND
+    mode: zeropage
+    cycles: 3
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: logical_and
+
+  - opcode: 0x29
+    mnemonic: AND
+    mode: immediate
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: logical_and
+
+  - opcode: 0x3d
+    mnemonic: AND
+    mode: absolute_x
+    cycles: 4
+    page_boundry_cycles: 1
+    affects_flags: [N, Z]
+    handler: logical_and
+
+  - opcode: 0x39
+    mnemonic: AND
+    mode: absolute_y
+    cycles: 4
+    page_boundry_cycles: 1
+    affects_flags: [N, Z]
+    handler: logical_and
+
+  - opcode: 0x21
+    mnemonic: AND
+    mode: index_x
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: logical_and
+
+  - opcode: 0x31
+    mnemonic: AND
+    mode: index_y
+    cycles: 5
+    page_boundry_cycles: 1
+    affects_flags: [N, Z]
+    handler: logical_and
+
+  - opcode: 0x35
+    mnemonic: AND
+    mode: zeropage_x
+    cycles: 4
+    page_boundry_cycles: 0
+    affects_flags: [N, Z]
+    handler: logical_and
+
+  # Arithmetic Shift Left
+  - opcode: 0x0a
+    mnemonic: ASL
+    mode: accumulator
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: arithmetic_shift_left
+
+  - opcode: 0x0e
+    mnemonic: ASL
+    mode: absolute
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: arithmetic_shift_left
+
+  - opcode: 0x06
+    mnemonic: ASL
+    mode: zeropage
+    cycles: 5
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: arithmetic_shift_left
+
+  - opcode: 0x1e
+    mnemonic: ASL
+    mode: absolute_x
+    cycles: 7
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: arithmetic_shift_left
+
+  - opcode: 0x16
+    mnemonic: ASL
+    mode: zeropage_x
+    cycles: 6
+    page_boundry_cycles: 0
+    affects_flags: [N, Z, C]
+    handler: arithmetic_shift_left
+
+  - opcode: 0xA9
+    mnemonic: LDA
+    mode: immediate
+    cycles: 2
+    page_boundry_cycles: 0
+    affects_flags: [Z, N]
+    handler: load_accumulator
+
+  - opcode: 0x85
+    mnemonic: STA
+    mode: zeropage
+    cycles: 3
+    page_boundry_cycles: 0
+    affects_flags: []
+    handler: store_accumulator
