@@ -10,7 +10,9 @@
 
 
 // std 
+#include <filesystem>
 #include <iostream>
+#include <memory>
 #include <vector>
 #include <string> 
 
@@ -18,6 +20,8 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 
+// local 
+#include "mesh_data.hpp"
 
 namespace OpenGlTutorial
 {
@@ -27,12 +31,6 @@ namespace OpenGlTutorial
         IMeshParser()=default;
         virtual ~IMeshParser()=default;
 
-        // Parse Mesh file into Mesh Object 
-        void virtual parse( const std::string& meshPath) = 0;      
-        
-        /* NOTE: Passing mesh into parser method enables
-        same parser to be used multiple times without 
-        reconstruction of parser object.
-        */
+        virtual std::shared_ptr<MeshData> parse( const std::filesystem::path mesh_path) = 0;      
     };
 }

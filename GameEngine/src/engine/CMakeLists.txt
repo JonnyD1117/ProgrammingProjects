@@ -1,17 +1,14 @@
-set( target engine )
-
 ################################
 #  Add All Engine Directories  #
 ################################
 add_subdirectory( types )
 add_subdirectory( interfaces )
-# add_subdirectory( audio ) 
-# add_subdirectory( core ) 
-# add_subdirectory( inputs ) 
-add_subdirectory( parsers ) 
+add_subdirectory( importers ) 
 add_subdirectory( rendering ) 
-# add_subdirectory( resources ) 
-add_subdirectory( utils ) 
+add_subdirectory( resources )
+# add_subdirectory( utils ) 
+
+set( target engine )
 
 set( sources 
     Engine.cpp
@@ -23,9 +20,9 @@ set( headers
 
 set( libs 
     engine_interfaces
-    engine_parsers
+    engine_importers
     engine_rendering
-    engine_utils
+    # engine_utils
 )
 
 add_library(${target} STATIC ${sources})

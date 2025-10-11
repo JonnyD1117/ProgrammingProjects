@@ -31,10 +31,11 @@
 #include "Renderer.hpp"
 #include "Camera.hpp"
 #include "Mesh.hpp"
-#include "mesh_parser.hpp"
 
 // Interfaces
 #include "engine_interfaces.hpp"
+
+// MeshManager
 
 
 namespace OpenGlTutorial

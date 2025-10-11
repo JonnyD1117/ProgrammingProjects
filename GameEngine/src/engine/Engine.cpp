@@ -136,8 +136,8 @@ int Engine::run()
     // OpenGlTutorial::ObjParser parser{path};
     // parser.parse();
 
-    std::string mesh_t = "obj";
-    std::unique_ptr<IMeshParser> parser = MeshParserFactory::create("obj");
+    // std::string mesh_t = "obj";
+    // std::unique_ptr<IMeshParser> parser = MeshParserFactory::create("obj");
 
     // std::vector<GLfloat> vertices = parser.getVertexBuffer();
     // std::vector<GLuint>  indices  = parser.getIndexBuffer();

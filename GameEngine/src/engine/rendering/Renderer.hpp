@@ -2,7 +2,7 @@
  * @file Renderer.hpp
  * @brief Renderer class provides centralized pipeline for drawing scene.
  * @author Jonathan Dorsey
- * @date Creation date: 205-05-07
+ * @date Creation date: 2025-05-07
  */
 
 #pragma once 

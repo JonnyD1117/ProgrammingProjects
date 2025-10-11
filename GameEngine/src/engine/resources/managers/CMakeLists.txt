@@ -1,19 +1,16 @@
-set( target engine_interfaces )
+
+set( target engine_resources_managers )
 
 
 set( headers 
-    IMesh.hpp
-    IMeshParser.hpp
-    engine_interfaces.hpp
+    MeshManager.hpp
 )
 
-set (libs 
-    glad::glad 
-    OpenGL::OpenGL
-    glm::glm
+set( libs 
+    engine_interfaces
+    engine_importers
     engine_types
 )
-
 
 add_library(${target} INTERFACE )
 

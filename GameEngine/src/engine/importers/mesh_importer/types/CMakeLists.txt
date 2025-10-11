@@ -1,21 +1,20 @@
-set( target engine_interfaces )
+set( target engine_mesh_types)
 
+set(source )
 
 set( headers 
-    IMesh.hpp
-    IMeshParser.hpp
-    engine_interfaces.hpp
+    mesh_types.hpp
 )
 
-set (libs 
+set( libs 
+    glfw 
     glad::glad 
     OpenGL::OpenGL
+    stb::stb
     glm::glm
-    engine_types
 )
 
-
-add_library(${target} INTERFACE )
+add_library(${target} INTERFACE ${sources})
 
 target_link_libraries(${target} INTERFACE ${libs} ) 
 target_include_directories(${target} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
