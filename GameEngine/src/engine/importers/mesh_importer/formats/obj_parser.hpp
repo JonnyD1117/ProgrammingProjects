@@ -40,13 +40,15 @@ namespace OpenGlTutorial
     class ObjParser : public virtual IMeshParser
     {
         public:
-        ObjParser()=default;
+        ObjParser();
         virtual ~ObjParser()=default;
 
-        virtual std::shared_ptr<MeshData> parse(const std::filesystem::path mesh_path) override; 
-        private:
+        virtual std::shared_ptr<MeshData> parse(const std::filesystem::path& mesh_path) override; 
 
-        std::filesystem::path m_path;
+        private:
+        std::vector<float> vertices; 
+        std::vector<unsigned int> indices;
+        bool isFlatShaded { false };
 
     };    
 }

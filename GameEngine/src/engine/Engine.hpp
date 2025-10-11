@@ -16,10 +16,11 @@
 #include <glm/gtc/type_ptr.hpp>
 
 // std
-#include <iostream>
-#include <filesystem>
-#include <string>
 #include <cmath>
+#include <filesystem>
+#include <iostream>
+#include <memory>
+#include <string>
 #include <vector>
 
 // Local 
@@ -36,6 +37,7 @@
 #include "engine_interfaces.hpp"
 
 // MeshManager
+#include "MeshManager.hpp"
 
 
 namespace OpenGlTutorial
@@ -65,6 +67,8 @@ struct Engine
     const std::string texture_path = engine_path + "/rendering/textures/";
 
     GLFWwindow* window;
+
+    MeshManager m_meshManager {};
 };
 
 }

@@ -1,5 +1,5 @@
 /**
- * @file MeshManager.hpp
+ * @file mesh_serializer.hpp
  * @brief 
  * @author Jonathan Dorsey
  * @date Creation date: 2025-10-10

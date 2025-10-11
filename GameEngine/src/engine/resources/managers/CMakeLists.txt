@@ -2,6 +2,10 @@
 set( target engine_resources_managers )
 
 
+set( sources 
+    MeshManager.cpp
+)
+
 set( headers 
     MeshManager.hpp
 )
@@ -12,7 +16,7 @@ set( libs
     engine_types
 )
 
-add_library(${target} INTERFACE )
+add_library(${target} STATIC ${sources} )
 
-target_link_libraries(${target} INTERFACE ${libs} ) 
-target_include_directories(${target} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+target_link_libraries(${target} PUBLIC ${libs} ) 
+target_include_directories(${target} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

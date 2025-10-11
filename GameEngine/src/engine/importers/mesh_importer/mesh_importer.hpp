@@ -14,6 +14,7 @@
 #pragma once
 
 // std
+#include <algorithm>
 #include <filesystem>
 #include <fstream>
 #include <functional>
@@ -30,6 +31,7 @@
 #include "assimp_parser.hpp"
 #include "fbx_parser.hpp"
 #include "obj_parser.hpp"
+#include "gltf_parser.hpp"
 
 #include "mesh_data.hpp"
 
@@ -59,36 +61,42 @@ struct MeshParserFactory
 {
     static std::unique_ptr<IMeshParser> createParser( std::filesystem::path path,  bool useAssimp )
     {
+        
+        std::string extension = path.extension();
 
-        if(useAssimp)
+        bool isSupported  = (meshFormatMapping.find(extension) != meshFormatMapping.end()) ? true  : false ;
+
+        // Use Assimp Parser (Override)
+        if(useAssimp || !isSupported)
         {
-            return std::make_unique<AssimpParser>(path);
+            return std::make_unique<AssimpParser>();
         }
 
-        switch(meshFormatMapping[path.extension()])
+        // Use Mesh Specific Parser
+        switch(meshFormatMapping[extension])
         {
             case MeshFormat::OBJ:
             {
-                return std::make_unique<ObjParser>(path);
+                return std::make_unique<ObjParser>();
                 break;
             }
             case MeshFormat::FBX:
             {
-                return std::make_unique<FbxParser>(path);
+                return std::make_unique<FbxParser>();
                 break;
             }
             case MeshFormat::GLTF:
             {
-                return std::make_unique<GltfParser>(path);
+                return std::make_unique<GltfParser>();
                 break;
             }
             default:
-                return std::make_unique<AssimpParser>(path);
+                return std::make_unique<AssimpParser>();
                 break;
 
         }
 
-        return std::make_unique<AssimpParser>(path);
+        return std::make_unique<AssimpParser>();
     }
 };
 

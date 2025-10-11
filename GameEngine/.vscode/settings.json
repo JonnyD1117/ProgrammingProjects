@@ -1,7 +1,6 @@
 {
     "files.associations": {
         "array": "cpp",
-        "numbers": "cpp",
         "atomic": "cpp",
         "bit": "cpp",
         "cctype": "cpp",
@@ -52,6 +51,7 @@
         "exception": "cpp",
         "format": "cpp",
         "iomanip": "cpp",
+        "numbers": "cpp",
         "optional": "cpp",
         "ratio": "cpp",
         "span": "cpp",
@@ -62,7 +62,6 @@
         "__tree": "cpp",
         "execution": "cpp",
         "ios": "cpp",
-        "locale": "cpp",
-        "thread": "cpp"
+        "locale": "cpp"
     }
 }

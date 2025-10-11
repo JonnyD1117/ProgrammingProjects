@@ -37,9 +37,19 @@ namespace OpenGlTutorial
     {
         public: 
 
-        FbxParser()=default;
+        //******************************//
+        //  Constructors & Destructors  //
+        //******************************//
+        FbxParser();
         virtual ~FbxParser()=default;
 
-        virtual std::shared_ptr<MeshData> parse(const std::filesystem::path mesh_path) override;     
+        //******************************//
+        //  Public Methods              //
+        //******************************//
+        virtual std::shared_ptr<MeshData> parse(const std::filesystem::path& mesh_path) override;   
+        
+        private:
+        std::vector<float> vertices; 
+        std::vector<unsigned int> indices;
     };    
 }

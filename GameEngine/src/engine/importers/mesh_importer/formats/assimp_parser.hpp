@@ -1,30 +1,30 @@
 /**
  * @file assimp_parser.hpp
- * @brief 
+ * @brief Use ASSIMP to parse Mesh files.
  * @author Jonathan Dorsey 
  * @date Creation date: 2025-05-12
  * 
+ * ASSIMP is a mesh parsing library that can be used to parse different mesh
+ * files. It is useful as a backup parser; however, in this project I want
+ * to try a to write my own parsers and merely "default" to ASSIMP as a 
+ * backup.
  */
 
 #pragma once 
 
 // std
-#include <algorithm>
-#include <array>
-#include <cctype>
 #include <filesystem>
-#include <fstream>
 #include <iostream>
-#include <list>
-#include <map>
-#include <sstream>
-#include <string>
 #include <vector>
-#include <memory>
 
 // opengl
 #include <glad/glad.h>
 #include <glm/glm.hpp>
+
+// assimp
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 
 // engine
 #include "engine_interfaces.hpp"
@@ -37,9 +37,22 @@ namespace OpenGlTutorial
     {
         public: 
 
-        AssimpParser()=default;
+        //******************************//
+        //  Constructors & Destructors  //
+        //******************************//
+        AssimpParser();
         virtual ~AssimpParser()=default;
 
-        virtual std::shared_ptr<MeshData> parse(const std::filesystem::path mesh_path) override; 
+        //******************************//
+        //  Public Methods              //
+        //******************************//
+        virtual std::shared_ptr<MeshData> parse(const std::filesystem::path& mesh_path) override; 
+
+        private:
+
+        std::vector<float> vertices; 
+        std::vector<unsigned int> indices;
+
+        Assimp::Importer importer;
     };    
 }

@@ -12,6 +12,7 @@
 #pragma once 
 
 // std
+#include <format>
 #include <vector>
 
 // OpenGL
@@ -24,8 +25,19 @@ namespace OpenGlTutorial
 
     struct MeshData
     {
+        // Require Move Semantics for Efficient ownership transfer from Import to MeshData Instance
+        MeshData(std::vector<GLfloat>&& vertices, 
+                 std::vector<GLuint>&& indices) 
+                : vertices { std::move(vertices) }
+                , indices  { std::move(indices) } 
+        {
+        }
+
+        ~MeshData()=default;
+        
         std::vector<GLfloat> vertices {};
         std::vector<GLuint> indices   {};
+        
     };
 
 } // namespace OpenGlTutorial

@@ -36,9 +36,13 @@ namespace OpenGlTutorial
     {
         public: 
 
-        GltfParser()=default;
+        GltfParser();
         virtual ~GltfParser()=default;
 
-        virtual std::shared_ptr<MeshData> parse(const std::filesystem::path mesh_path) override;     
+        virtual std::shared_ptr<MeshData> parse(const std::filesystem::path& mesh_path) override;     
+
+        private:
+        std::vector<float> vertices; 
+        std::vector<unsigned int> indices;
     };    
 }

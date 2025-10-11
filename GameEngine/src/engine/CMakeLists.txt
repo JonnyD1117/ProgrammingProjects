@@ -22,6 +22,7 @@ set( libs
     engine_interfaces
     engine_importers
     engine_rendering
+    engine_resources
     # engine_utils
 )
 

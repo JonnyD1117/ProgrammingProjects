@@ -31,6 +31,8 @@ namespace OpenGlTutorial
         IMeshParser()=default;
         virtual ~IMeshParser()=default;
 
-        virtual std::shared_ptr<MeshData> parse( const std::filesystem::path mesh_path) = 0;      
+        virtual std::shared_ptr<MeshData> parse( const std::filesystem::path& mesh_path) = 0;      
+
+        static constexpr size_t RESERVE_SIZE = 10000;
     };
 }
