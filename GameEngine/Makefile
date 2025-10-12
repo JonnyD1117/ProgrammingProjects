@@ -1,4 +1,4 @@
-.PHONY: install_deps, config, build, run, clean_build, clean_bin, clean_conan, clean_all, clean_venv, test, site, serve, docs, venv
+.PHONY: install_deps, config, build, run, clean_build, clean_bin, clean_conan, clean_all, clean_venv, test, site, serve, docs, venv, gdb
 
 venv:
 	@if [ ! -d .venv ]; then \
@@ -10,16 +10,19 @@ venv:
 	fi
 
 install_deps:
-	CONAN_SYSREQUIRES_SUDO=1 conan install . --output-folder=conan --build=missing -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True
+	CONAN_SYSREQUIRES_SUDO=1 conan install . --output-folder=conan --build=missing -s build_type=Debug -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True
 
 config:
-	cmake --preset=default
+	cmake --preset=debug #default
 
 build: config
-	cmake --build . --preset=default
+	cmake --build . --preset=debug #default
 
 run:
 	./bin/my_app
+
+gdb: 
+	gdb ./bin/my_app
 
 test:
 	cd ./build && ctest

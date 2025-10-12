@@ -6,13 +6,13 @@
 ################################
 
 add_subdirectory(managers)
-# add_subdirectory(serialization)
+add_subdirectory(serializers)
 
 set( target engine_resources )
 
 set( libs 
     engine_resources_managers
-    # engine_resources_serialization
+    engine_resources_serializers
 )
 
 add_library(${target} INTERFACE )

@@ -28,7 +28,7 @@
 // engine
 #include "engine_interfaces.hpp"
 
-#include "mesh_data.hpp"
+#include "MeshData.hpp"
 
 namespace OpenGlTutorial
 {

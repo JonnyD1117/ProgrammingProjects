@@ -1,21 +1,19 @@
 # Add Mesh Parser Sub-Libraries
-add_subdirectory( types )
 add_subdirectory( formats )
 
 # Create Mesh Parser Library
 set( target engine_mesh_importer )
 
 set( sources 
-    mesh_importer.cpp
+    MeshImporter.cpp
 )
 
 set( headers 
-    mesh_importer.hpp
+    MeshImporter.hpp
 )
 
 set (libs 
     engine_mesh_formats
-    engine_mesh_types
     engine_types
 )
 

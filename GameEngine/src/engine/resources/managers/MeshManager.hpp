@@ -16,8 +16,8 @@
 #include <vector>
 
 // Mesh Importer
-#include "mesh_importer.hpp"
-#include "mesh_data.hpp"
+#include "MeshImporter.hpp"
+#include "MeshData.hpp"
 
 
 namespace OpenGlTutorial

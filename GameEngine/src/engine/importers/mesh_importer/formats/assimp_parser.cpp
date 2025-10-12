@@ -28,15 +28,15 @@ namespace OpenGlTutorial
             aiVector3D norm = mesh->HasNormals() ? mesh->mNormals[i] : aiVector3D(0, 0, 0);
             aiVector3D uv = mesh->HasTextureCoords(0) ? mesh->mTextureCoords[0][i] : aiVector3D(0, 0, 0);
 
-            // Push to vertex buffer: position (3), normal (3), uv (2)
-            vertices.push_back(pos.x);
-            vertices.push_back(pos.y);
-            vertices.push_back(pos.z);
-            // vertices.push_back(uv.x);
-            // vertices.push_back(uv.y);
-            vertices.push_back(norm.x);
-            vertices.push_back(norm.y);
-            vertices.push_back(norm.z);
+            // Create & Set MeshVertex
+            MeshVertex vertex;
+            vertex.position = {pos.x, pos.y, pos.z}; 
+            vertex.texture  = {uv.x, uv.y}; 
+            vertex.normal   = {norm.x, norm.y, norm.z}; 
+            // vertex.color = {pos.x, pos.y, pos.z}; 
+
+            // Append Vertex to vertices vector
+            vertices.push_back(vertex);
         }
 
         for (size_t i = 0; i < mesh->mNumFaces; ++i) 

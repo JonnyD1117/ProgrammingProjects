@@ -2,14 +2,10 @@
 # Set Library Name
 set( target engine_types )
 
-# Create list of Cpp src files
-set( sources 
-    
-)
-
 # Create list of Hpp headers
 set( headers 
-    mesh_data.hpp
+    MeshData.hpp
+    MeshTypes.hpp
 )
 
 # Create list libraries to be linked with
@@ -21,7 +17,7 @@ set( libs
 )
 
 # Create new lib based on target name 
-add_library(${target} INTERFACE ${sources})
+add_library(${target} INTERFACE)
 
 # Link libraries & define include paths
 target_link_libraries(${target} INTERFACE ${libs} ) 

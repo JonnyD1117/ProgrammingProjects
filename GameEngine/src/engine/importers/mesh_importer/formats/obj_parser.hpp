@@ -33,7 +33,9 @@
 // engine
 #include "engine_interfaces.hpp"
 
-#include "mesh_data.hpp"
+// Mesh Types
+#include "MeshTypes.hpp"
+#include "MeshData.hpp"
 
 namespace OpenGlTutorial
 {
@@ -46,6 +48,13 @@ namespace OpenGlTutorial
         virtual std::shared_ptr<MeshData> parse(const std::filesystem::path& mesh_path) override; 
 
         private:
+
+        std::vector<VertexCoords>  m_vertexCoords;
+        std::vector<TextureCoords> m_textureCoords;
+        std::vector<Normal>        m_normals;
+        std::vector<Face>          m_faces;
+
+
         std::vector<float> vertices; 
         std::vector<unsigned int> indices;
         bool isFlatShaded { false };

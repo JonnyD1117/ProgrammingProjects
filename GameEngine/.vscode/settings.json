@@ -62,6 +62,7 @@
         "__tree": "cpp",
         "execution": "cpp",
         "ios": "cpp",
-        "locale": "cpp"
+        "locale": "cpp",
+        "bitset": "cpp"
     }
 }

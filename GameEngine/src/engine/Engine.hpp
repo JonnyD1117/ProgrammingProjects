@@ -38,6 +38,7 @@
 
 // MeshManager
 #include "MeshManager.hpp"
+#include "MeshSerializer.hpp"
 
 
 namespace OpenGlTutorial

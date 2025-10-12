@@ -28,7 +28,8 @@
 
 // engine
 #include "engine_interfaces.hpp"
-#include "mesh_data.hpp"
+#include "MeshData.hpp"
+#include "MeshTypes.hpp"
 
 
 namespace OpenGlTutorial
@@ -50,8 +51,8 @@ namespace OpenGlTutorial
 
         private:
 
-        std::vector<float> vertices; 
-        std::vector<unsigned int> indices;
+        std::vector<MeshVertex> vertices; 
+        std::vector<size_t>     indices;
 
         Assimp::Importer importer;
     };    

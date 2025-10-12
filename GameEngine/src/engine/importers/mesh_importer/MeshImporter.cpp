@@ -1,5 +1,5 @@
 /**
- * @file mesh_importer.hpp
+ * @file MeshImporter.hpp
  * @brief MeshImporter class which can load a mesh files from different formats
  * @author Jonathan Dorsey
  * @date Creation date: 2025-10-10
@@ -15,7 +15,7 @@
 #include <format>
 
 // local 
-#include "mesh_importer.hpp"
+#include "MeshImporter.hpp"
 
 
 namespace OpenGlTutorial

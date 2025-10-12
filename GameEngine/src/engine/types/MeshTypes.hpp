@@ -1,5 +1,5 @@
 /**
- * @file mesh_types.hpp
+ * @file MeshTypes.hpp
  * @brief File defines types which the mesh parser will use.
  * @author Jonathan Dorsey
  * @date Creation date: 2025-05-27
@@ -25,10 +25,10 @@
 namespace OpenGlTutorial
 {
 
-struct Vertex
+struct MeshVertex
 {
     std::array<double, 3> position;
-    std::array<double, 2> texCoords;
+    std::array<double, 2> texture;
     std::array<double, 3> normal;
     std::array<double, 3> color;
 };
