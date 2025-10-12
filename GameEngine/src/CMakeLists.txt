@@ -4,4 +4,4 @@ add_subdirectory( engine )
 
 # Tests Needs to be added last since it COULD 
 # depend on every other library being built
-# add_subdirectory( tests )
+add_subdirectory( tests )
