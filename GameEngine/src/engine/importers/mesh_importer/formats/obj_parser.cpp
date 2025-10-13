@@ -29,6 +29,22 @@ namespace OpenGlTutorial
         std::ifstream in { mesh_path };
         std::string line;
 
+        size_t numVerts = 0; 
+
+        /*
+            File pass #1:
+            - Determine # of Vertices 
+            - Determine # of Faces (in file NOTE maybe non-triangular)
+            - Use Information to preallocate Data in #2nd pass
+        */  
+
+        /*
+            File pass #2:
+            - 
+        */
+
+        MeshData data;
+
         while(std::getline(in, line))
         {
             // Skip Comments && Empty Lines
@@ -45,29 +61,41 @@ namespace OpenGlTutorial
             while( ss >> word )
             {
                 line_words.push_back(word);
-
-                // std::cout << word << std::endl;
             }
 
+            // Parse Obj Text
             if( line_words[0] == "v")
             {
                 // Parse Vertices (e.g. v # # # )
-                // std::cout << line << std::endl;
+                if(line_words.size() == 4)
+                {
+  
+
+                    m_vertexIdx++;
+                }
             }
             else if( line_words[0] == "vn")
             {
                 // Parse Normals (e.g. vn # # # )
-                // std::cout << line << std::endl;
+                if(line_words.size() == 4)
+                {
+  
+
+                    m_normalIdx++;
+                }
             }
             else if( line_words[0] == "vt")
             {
                 // Parsed Textures (e.g. vt # #) UV coordinates
-                // std::cout << line << std::endl;
+                if(line_words.size() == 3)
+                {
+
+                    m_textureIdx++;
+                }
             }
             else if( line_words[0] == "f")
             {
                 // Parsed Face Definitions
-                // std::cout << line << std::endl;
 
                 // if(line_words.size() > 4)
                 // {
@@ -83,13 +111,7 @@ namespace OpenGlTutorial
             {
                 // Character NOT Identified 
                 std::cout << "Unidentified Character: " << line << std::endl;
-            }
-
-            
-
-            
-
-            
+            }            
         }
 
         // Triangularize ALL Faces 

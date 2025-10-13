@@ -55,7 +55,7 @@ Engine::~Engine()
 int Engine::run()
 {
 
-    std::string teaPotPath = "/home/indy/repos/ProgrammingProjects/GameEngine/src/assets/meshes/teapot.obj";
+    std::string teaPotPath = "/home/indy/repo/ProgrammingProjects/GameEngine/src/assets/meshes/teapot.obj";
     // m_meshManager.setAssimp(true);
     std::shared_ptr<MeshData>mesh_data = m_meshManager.getMeshfromFile(teaPotPath);   
 
