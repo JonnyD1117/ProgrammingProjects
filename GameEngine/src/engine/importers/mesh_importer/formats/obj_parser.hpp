@@ -13,51 +13,60 @@
 #pragma once 
 
 // std
-#include <algorithm>
-#include <array>
-#include <cctype>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
-#include <list>
-#include <map>
+#include <ranges>
 #include <sstream>
 #include <string>
 #include <vector>
-#include <memory>
+
 
 // opengl
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 
+// assimp
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+
 // engine
 #include "engine_interfaces.hpp"
-
-// Mesh Types
-#include "MeshTypes.hpp"
 #include "MeshData.hpp"
+#include "MeshTypes.hpp"
+
 
 namespace OpenGlTutorial
 {
     class ObjParser : public virtual IMeshParser
     {
-        public:
+        public: 
+
+        //******************************//
+        //  Constructors & Destructors  //
+        //******************************//
         ObjParser();
         virtual ~ObjParser()=default;
 
+        //******************************//
+        //  Public Methods              //
+        //******************************//
         virtual std::shared_ptr<MeshData> parse(const std::filesystem::path& mesh_path) override; 
 
         private:
 
-        std::vector<VertexCoords>  m_vertexCoords;
-        std::vector<TextureCoords> m_textureCoords;
-        std::vector<Normal>        m_normals;
-        std::vector<Face>          m_faces;
+        size_t m_faceIdx    {0};
+        size_t m_vertexIdx  {0};
+        size_t m_normalIdx  {0};
+        size_t m_textureIdx {0};
+
+        std::vector<std::string> non_triangular_faces {};
+
+        std::vector<MeshVertex> vertices; 
+        std::vector<size_t>     indices;
 
 
-        std::vector<float> vertices; 
-        std::vector<unsigned int> indices;
-        bool isFlatShaded { false };
-
+        bool isFlat { false };
     };    
 }

@@ -26,16 +26,79 @@ namespace OpenGlTutorial
     std::shared_ptr<MeshData> ObjParser::parse(const std::filesystem::path& mesh_path)
     {
         // Handle File IO
+        std::ifstream in { mesh_path };
+        std::string line;
 
-        // Iterate Line by Line over file 
+        while(std::getline(in, line))
+        {
+            // Skip Comments && Empty Lines
+            if(line[0] == '#' || line == "")
+            {
+                continue;
+            }
 
-        // Ignore Commented Lines
+            // Split Line by Whitespace
+            std::stringstream ss { line };
+            std::string word;
+            std::vector<std::string> line_words;
 
-        // Parse Vertices (e.g. v # # # )
+            while( ss >> word )
+            {
+                line_words.push_back(word);
 
-        // Parse Normals (e.g. vn # # # )
+                // std::cout << word << std::endl;
+            }
 
-        // Parsed Textures (e.g. vt # #) UV coordinates
+            if( line_words[0] == "v")
+            {
+                // Parse Vertices (e.g. v # # # )
+                // std::cout << line << std::endl;
+            }
+            else if( line_words[0] == "vn")
+            {
+                // Parse Normals (e.g. vn # # # )
+                // std::cout << line << std::endl;
+            }
+            else if( line_words[0] == "vt")
+            {
+                // Parsed Textures (e.g. vt # #) UV coordinates
+                // std::cout << line << std::endl;
+            }
+            else if( line_words[0] == "f")
+            {
+                // Parsed Face Definitions
+                // std::cout << line << std::endl;
+
+                // if(line_words.size() > 4)
+                // {
+                //     // Non-Triangular Face (Must be triangularize)
+                // }
+                // else 
+                // {
+                    
+                // }
+                
+            }
+            else 
+            {
+                // Character NOT Identified 
+                std::cout << "Unidentified Character: " << line << std::endl;
+            }
+
+            
+
+            
+
+            
+        }
+
+        // Triangularize ALL Faces 
+
+        // Handle Vertex Normals (including for FLAT shading)
+
+
+
+        
 
         /*  
             Rules:
@@ -57,6 +120,6 @@ namespace OpenGlTutorial
            Computer "normal" depending on whether smooth shading is ON or OFF
 
         */
-        return nullptr;
+        return std::make_shared<MeshData>();
     }
 }

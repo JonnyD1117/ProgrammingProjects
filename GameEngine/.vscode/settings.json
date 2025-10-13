@@ -63,6 +63,7 @@
         "execution": "cpp",
         "ios": "cpp",
         "locale": "cpp",
-        "bitset": "cpp"
+        "bitset": "cpp",
+        "ranges": "cpp"
     }
 }

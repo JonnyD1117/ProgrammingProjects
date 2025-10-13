@@ -56,23 +56,8 @@ int Engine::run()
 {
 
     std::string teaPotPath = "/home/indy/repos/ProgrammingProjects/GameEngine/src/assets/meshes/teapot.obj";
-    m_meshManager.setAssimp(true);
+    // m_meshManager.setAssimp(true);
     std::shared_ptr<MeshData>mesh_data = m_meshManager.getMeshfromFile(teaPotPath);   
-
-    std::string serPath = "/home/indy/repos/ProgrammingProjects/GameEngine/src/assets/data/teapot.dat";
-
-    MeshSerializer::serialize(*mesh_data, serPath);
-
-    MeshData deserialize = MeshSerializer::deserialize("/home/indy/repos/ProgrammingProjects/GameEngine/src/assets/data/teapot.dat");
-
-    
-    for(size_t ctr = 0 ; ctr<deserialize.vertices.size(); ctr++)
-    {
-        assert(mesh_data->vertices[ctr].position == deserialize.vertices[ctr].position);
-    }
-
-    
-
 
     // // Pyramid Mesh
     // Mesh mesh(vertices, indices);
