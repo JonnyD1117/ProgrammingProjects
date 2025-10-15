@@ -21,6 +21,12 @@ namespace OpenGlTutorial
         // Pre-allocate Vectors for Effiency
         vertices.reserve(RESERVE_SIZE);
         indices.reserve(RESERVE_SIZE);
+
+        m_vertexVec            .reserve(RESERVE_SIZE);
+        m_textureVec           .reserve(RESERVE_SIZE);
+        m_normalVec            .reserve(RESERVE_SIZE);
+        m_triFaceVec           .reserve(RESERVE_SIZE);
+        m_non_triangular_faces .reserve(RESERVE_SIZE);
     }
 
     std::shared_ptr<MeshData> ObjParser::parse(const std::filesystem::path& mesh_path)
@@ -69,41 +75,101 @@ namespace OpenGlTutorial
                 // Parse Vertices (e.g. v # # # )
                 if(line_words.size() == 4)
                 {
-  
+                    std::array<float,3> state;
+                    for(size_t idx=0; idx < 3; idx++ )
+                    {
+                        size_t wordIdx = idx + 1;                         
+                        state[idx] = std::stod(line_words[wordIdx]);
+                    }
+
+                    m_vertexVec.push_back(state);
 
                     m_vertexIdx++;
                 }
+
+                continue;
             }
             else if( line_words[0] == "vn")
             {
                 // Parse Normals (e.g. vn # # # )
                 if(line_words.size() == 4)
                 {
-  
+                    std::array<float,3> state;
+                    for(size_t idx=0; idx < 3; idx++ )
+                    {
+                        size_t wordIdx = idx + 1; 
+                        state[idx] = std::stod(line_words[wordIdx]);
+                    }
 
+                    m_normalVec.push_back(state);
                     m_normalIdx++;
                 }
+                continue;
             }
             else if( line_words[0] == "vt")
             {
                 // Parsed Textures (e.g. vt # #) UV coordinates
                 if(line_words.size() == 3)
                 {
+                    std::array<float,2> state;
+                    for(size_t idx=0; idx < 2; idx++ )
+                    {
+                        size_t wordIdx = idx + 1; 
+                        state[idx] = std::stod(line_words[wordIdx]);
+                    }
 
+                    m_textureVec.push_back(state);
                     m_textureIdx++;
                 }
+
+                continue;
             }
             else if( line_words[0] == "f")
             {
-                // Parsed Face Definitions
+                // ##############################
+                // THIS SOLUTIONS ISN"T GOOD... should triangularize each face as it is being readin 
+                // and THEN write the results to the face vector... 
+                //
+                // if the face is already triangular.. just write it to the face vector 
+                // This preservers the order of the faces (???? is that important?)
+                // ##############################
+                // // Parsed Face Definitions
 
                 // if(line_words.size() > 4)
                 // {
-                //     // Non-Triangular Face (Must be triangularize)
+                //     m_non_triangular_faces.push_back(line);
+                //     m_nonTriFaceIdx++;
+                // }
+                // else if (line_words.size() == 4)
+                // {
+                //     auto to_optional_index = [](const std::string& s) -> std::optional<size_t> {
+                //         if (s.empty()) return std::nullopt;
+                //         try {
+                //             return std::stoul(s);
+                //         } catch (...) {
+                //             return std::nullopt;
+                //         }
+                //     };
+
+                //     for( std::string element : line_words)
+                //     {
+                //         std::vector<std::string> tokens = split(element, '/');
+                //         std::array<std::optional<size_t>,3> face;
+
+                //         size_t j = 0; 
+                //         for(auto token : tokens)
+                //         {
+                //             face[j] = to_optional_index(token);
+                //             j++;
+                //         }
+
+                //         m_triFaceVec.push_back(face);
+                //     }
+                //     m_faceIdx++;
                 // }
                 // else 
                 // {
-                    
+                //     // Mal-Formed Face???
                 // }
                 
             }
@@ -113,6 +179,36 @@ namespace OpenGlTutorial
                 std::cout << "Unidentified Character: " << line << std::endl;
             }            
         }
+
+        m_vertexVec.shrink_to_fit();
+        m_normalVec.shrink_to_fit();
+        m_textureVec.shrink_to_fit();
+        m_triFaceVec.shrink_to_fit();
+
+        std::cout << "Print Mesh File Stats:" << std::endl;
+
+        std::cout << std::format("Num Vertex Lines: {}", m_vertexVec.size()) << std::endl;
+        std::cout << std::format("Num Normal Lines: {}", m_normalVec.size()) << std::endl;
+        std::cout << std::format("Num Texture Lines: {}", m_textureVec.size()) << std::endl;
+        std::cout << std::format("Num Triangular Face Lines: {}", m_triFaceVec.size()) << std::endl;
+        std::cout << std::format("Num Non-Triangular Face Lines: {}", m_non_triangular_faces.size()) << std::endl;
+
+
+        size_t idx = 0;
+        for( auto face : m_triFaceVec)
+        {
+            // if (face[0]!=std::nullopt && face[1]!=std::nullopt && face[2]!=std::nullopt)
+            // {
+            //     std::cout << std::format("Face: {} {} {}", face[0], face[1],face[2] ) << std::endl;
+            // }
+            
+
+            idx++;
+            if (idx >=10) { break; }
+        }
+
+
+
 
         // Triangularize ALL Faces 
 

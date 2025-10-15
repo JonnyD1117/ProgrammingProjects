@@ -33,6 +33,6 @@ namespace OpenGlTutorial
 
         virtual std::shared_ptr<MeshData> parse( const std::filesystem::path& mesh_path) = 0;      
 
-        static constexpr size_t RESERVE_SIZE = 10000;
+        static constexpr size_t RESERVE_SIZE = 100000;
     };
 }

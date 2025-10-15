@@ -64,6 +64,8 @@
         "ios": "cpp",
         "locale": "cpp",
         "bitset": "cpp",
-        "ranges": "cpp"
+        "ranges": "cpp",
+        "cstdarg": "cpp",
+        "numeric": "cpp"
     }
 }

@@ -14,8 +14,10 @@
 
 // std
 #include <filesystem>
+#include <format>
 #include <fstream>
 #include <iostream>
+#include <optional>
 #include <ranges>
 #include <sstream>
 #include <string>
@@ -56,12 +58,29 @@ namespace OpenGlTutorial
 
         private:
 
+        std::vector<std::string> split(const std::string& str, char delimiter) {
+            std::vector<std::string> tokens;
+            std::stringstream ss(str);
+            std::string item;
+
+            while (std::getline(ss, item, delimiter)) {
+                tokens.push_back(item);
+            }
+            return tokens;
+        }
+
         size_t m_faceIdx    {0};
         size_t m_vertexIdx  {0};
         size_t m_normalIdx  {0};
         size_t m_textureIdx {0};
 
-        std::vector<std::string> non_triangular_faces {};
+        size_t m_nonTriFaceIdx {0};
+        
+        std::vector<std::array<float,3>>                m_vertexVec   {};
+        std::vector<std::array<float,2>>                m_textureVec  {};
+        std::vector<std::array<float,3>>                m_normalVec   {};
+        std::vector<std::array<std::optional<size_t>,3>> m_triFaceVec {};
+        std::vector<std::string>               m_non_triangular_faces {};
 
         std::vector<MeshVertex> vertices; 
         std::vector<size_t>     indices;
