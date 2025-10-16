@@ -126,52 +126,41 @@ namespace OpenGlTutorial
             }
             else if( line_words[0] == "f")
             {
-                // ##############################
-                // THIS SOLUTIONS ISN"T GOOD... should triangularize each face as it is being readin 
-                // and THEN write the results to the face vector... 
-                //
-                // if the face is already triangular.. just write it to the face vector 
-                // This preservers the order of the faces (???? is that important?)
-                // ##############################
-                // // Parsed Face Definitions
+                auto to_optional_index = [](const std::string& s) -> std::optional<size_t> {
+                        if (s.empty()) return std::nullopt;
+                        try {
+                            return std::stoul(s);
+                        } catch (...) {
+                            return std::nullopt;
+                        }
+                    };
 
-                // if(line_words.size() > 4)
-                // {
-                //     m_non_triangular_faces.push_back(line);
-                //     m_nonTriFaceIdx++;
-                // }
-                // else if (line_words.size() == 4)
-                // {
-                //     auto to_optional_index = [](const std::string& s) -> std::optional<size_t> {
-                //         if (s.empty()) return std::nullopt;
-                //         try {
-                //             return std::stoul(s);
-                //         } catch (...) {
-                //             return std::nullopt;
-                //         }
-                //     };
+                if( line_words.size() == 4 )
+                {
+                    for( std::string element : line_words)
+                    {
+                        std::vector<std::string> tokens = split(element, '/');
+                        std::array<std::optional<size_t>,3> face;
 
-                //     for( std::string element : line_words)
-                //     {
-                //         std::vector<std::string> tokens = split(element, '/');
-                //         std::array<std::optional<size_t>,3> face;
+                        size_t j = 0; 
+                        for(auto token : tokens)
+                        {
+                            face[j] = to_optional_index(token);
+                            j++;
+                        }
 
-                //         size_t j = 0; 
-                //         for(auto token : tokens)
-                //         {
-                //             face[j] = to_optional_index(token);
-                //             j++;
-                //         }
-
-                //         m_triFaceVec.push_back(face);
-                //     }
-                //     m_faceIdx++;
-                // }
-                // else 
-                // {
-                //     // Mal-Formed Face???
-                // }
-                
+                        m_triFaceVec.push_back(face);
+                    }
+                    m_faceIdx++;
+                }
+                else if ( line_words.size() < 4 )
+                {
+                    // Malformed Face - Must be a triangle at minimum.
+                }
+                else
+                {
+                    // Handle Triangularization
+                }                
             }
             else 
             {
@@ -193,30 +182,19 @@ namespace OpenGlTutorial
         std::cout << std::format("Num Triangular Face Lines: {}", m_triFaceVec.size()) << std::endl;
         std::cout << std::format("Num Non-Triangular Face Lines: {}", m_non_triangular_faces.size()) << std::endl;
 
-
-        size_t idx = 0;
-        for( auto face : m_triFaceVec)
-        {
-            // if (face[0]!=std::nullopt && face[1]!=std::nullopt && face[2]!=std::nullopt)
-            // {
-            //     std::cout << std::format("Face: {} {} {}", face[0], face[1],face[2] ) << std::endl;
-            // }
-            
-
-            idx++;
-            if (idx >=10) { break; }
-        }
-
-
-
-
-        // Triangularize ALL Faces 
-
-        // Handle Vertex Normals (including for FLAT shading)
-
-
-
+        // Process the Face Vector to construct "MeshVertex"
+        std::vector<MeshVertex> m_meshVertexVec {};
         
+        m_meshVertexVec.reserve(m_triFaceVec.size());
+
+        for ( auto face : m_triFaceVec )
+        {
+            size_t vertIdx = 0;
+            size_t textIdx = 0; 
+            size_t normIdx = 0; 
+
+            m_meshVertexVec.emplace_back(m_vertexVec[vertIdx], m_textureVec[textIdx], m_normalVec[normIdx]);
+        }
 
         /*  
             Rules:

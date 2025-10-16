@@ -27,30 +27,30 @@ namespace OpenGlTutorial
 
 struct MeshVertex
 {
-    std::array<double, 3> position;
-    std::array<double, 2> texture;
-    std::array<double, 3> normal;
-    std::array<double, 3> color;
+    std::array<float, 3> position;
+    std::array<float, 2> texture;
+    std::array<float, 3> normal;
+    std::array<float, 3> color;
 };
 
 struct VertexCoords
 {
-    std::array<double, 3> data;
+    std::array<float, 3> data;
 };
 
 struct TextureCoords
 {
-    std::array<double, 2> data;
+    std::array<float, 2> data;
 };
 
 struct Normal
 {
-    std::array<double, 3> data;
+    std::array<float, 3> data;
 };
 
 struct Colors
 {
-    std::array<double, 3> data;
+    std::array<float, 3> data;
 };
 
 enum class FaceTypes : int
