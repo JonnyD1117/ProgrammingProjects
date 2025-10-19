@@ -65,7 +65,7 @@ if __name__ == "__main__":
     rendered_code = template.render(instructions=instructions)
     print(rendered_code)
 
-    outPath = f"{base}/dispatch_table_6502_autogen.cpp"
+    outPath = f"{base}/instr_dispatch_table.cpp"
 
     with open(outPath, "w") as f:
         f.write(rendered_code)

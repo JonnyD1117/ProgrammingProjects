@@ -8,7 +8,6 @@
 
 // MOS6502
 #include "status.hpp"
-// #include "instruction_set.hpp"
 
 namespace MOS6502
 {
@@ -21,8 +20,6 @@ struct CPU
     uint8_t  A;         // Declare Accumulator
     uint8_t  X;         // Declare Index Reg. X
     uint8_t  Y;         // Declare Index Reg. Y
-    ProcessorStatus P;  // Declare Processor Register
-
-    
+    ProcessorStatus P;  // Declare Processor Register    
 };
 }

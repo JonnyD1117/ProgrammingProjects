@@ -17,6 +17,9 @@ Types
 
 #pragma once 
 
+#include <fstream>
+#include <iostream>
+#include <string>
 
 namespace MOS6502
 {
@@ -27,7 +30,11 @@ namespace MOS6502
         Emulator()=default;
         ~Emulator()=default;
 
+        int run();
+
         private:
+
+        std::ifstream in;
 
         
 

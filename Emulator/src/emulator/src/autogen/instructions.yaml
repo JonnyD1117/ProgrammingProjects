@@ -241,7 +241,7 @@ instruction_set:
     cycles: 7
     page_boundry_cycles: 0
     affects_flags: []
-    handler: break
+    handler: break_and_interrupt
 
   - opcode: 0x50
     mnemonic: BVC

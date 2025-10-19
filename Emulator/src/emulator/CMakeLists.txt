@@ -2,11 +2,12 @@
 set( target emulator )
 
 set (sources 
+    main.cpp
     emulator.cpp
 )
 
 set( libs 
-    # yaml-cpp::yaml-cpp
+
 )
 
 # Compile Library
