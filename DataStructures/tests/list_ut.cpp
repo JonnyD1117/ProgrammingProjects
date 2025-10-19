@@ -1,4 +1,9 @@
+// std
+
+// GTest
 #include <gtest/gtest.h>
+
+// Local
 #include "linked_list.hpp"
 
 
@@ -41,7 +46,6 @@ TEST(TestLinkedListBasic, ListMethodPushfront)
 
     while(true)
     {
-        std::cout << myNode->value << std::endl;
         EXPECT_EQ(myNode->value, ctr);
         myNode = myNode->next;
 
@@ -258,16 +262,3 @@ TEST(TestLinkedListBasic, ListClearMethod) {
     myList1.clear();
     EXPECT_EQ(myList1.size(), 0);
 }
-
-// TEST(TestLinkedListBasic, ListResizeMethod) {
-    
-//     LinkedList<int> myList1 {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-
-//     myList1.resize(5, 69);
-
-//     std::cout << myList1.size() << std::endl;
-
-//     // EXPECT_EQ(myList1.size(), 5);
-
-// }
-

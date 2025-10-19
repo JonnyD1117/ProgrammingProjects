@@ -1,4 +1,9 @@
+// std
+
+// GTest
 #include <gtest/gtest.h>
+
+// Local
 #include "vector.hpp"
 
 using namespace structures;
@@ -88,7 +93,6 @@ TEST(TestVectorIteratorMethods, TestIteratorSubtractTwoIterators) {
     int sub_dist = 5; 
     iter_last - sub_dist; 
     ret_distance = iter_last - iter_first;
-    // std::cout << "Returned Distance = " << ret_distance << std::endl;
     EXPECT_TRUE(ret_distance == (expected_distance - sub_dist));
 }
 
@@ -96,12 +100,10 @@ TEST(TestVectorIteratorMethods, TestIteratorRangeBaseForLoop) {
     int expected_distance = 10;
     Vector<int> vec1 = build_vector<int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 
-    // std::cout << "RANGE BASED FOR LOOP" << std::endl;
     int ctr = 0; 
     for(auto p : vec1)
     {
         ctr++;
-        // std::cout << p << std::endl;
         EXPECT_EQ(ctr, p);
     }
 
@@ -113,12 +115,10 @@ TEST(TestVectorIteratorMethods, TestIteratorBasedForLoop) {
     int expected_distance = length;
     Vector<int> vec1 = build_vector<int>(11, 12, 13, 14, 15, 16, 17, 18, 19, 20);
 
-    // std::cout << "Iter BASED FOR LOOP" << std::endl;
     int ctr = 10; 
     for(Vector<int>::iterator it = vec1.begin(); it != vec1.end(); ++it)
     {
         ctr++;
-        // std::cout << *it << std::endl;
         EXPECT_EQ(ctr, *it);
     }
 
@@ -138,7 +138,6 @@ TEST(TestVectorReverseIteratorMethods, TestReverseIteratorBasedForLoop) {
     int ctr = 20; 
     for(Vector<int>::reverse_iterator it = vec1.rbegin(); it != vec1.rend(); ++it)
     {
-        // std::cout << *it << std::endl;
         EXPECT_EQ(ctr, *it);
         ctr--;
     }
@@ -157,7 +156,6 @@ TEST(TestVectorPublicMethods, TestVectorInitializerList)
     EXPECT_TRUE(first_vec_len == my_vector.size());
     EXPECT_TRUE(second_vec_len == my_vector8.size());
 
-        // std::cout << "MY FUCKING ARRAY" << std::endl;
     int ctr = 0; 
     for(auto p : my_vector)
     {   
@@ -167,7 +165,6 @@ TEST(TestVectorPublicMethods, TestVectorInitializerList)
     ctr = 7;
     for(auto p : my_vector8)
     {
-        std::cout << "My Vector" << p << std::endl;
         EXPECT_EQ(p, ++ctr);
     }
 }
@@ -177,7 +174,6 @@ TEST(TestVectorPublicMethods, TestVectorDefaultConstructor) {
 
     for(auto p : myVector)
     {
-        std::cout << p << std::endl;
         EXPECT_EQ(p, 0);
     }
 }
@@ -361,24 +357,6 @@ TEST(TestVectorPublicMethods, TestVectorSwapMethod) {
     for (int idx = 0; idx < length; idx++) { EXPECT_EQ(vector_1[idx], vector_2[idx]); }
 }
 
-class DummyClass
-{
-    public: 
-    DummyClass() = default;
-    DummyClass(float my_float, char my_char, int my_int, std::string my_string) :
-    my_float{my_float}, my_char{my_char}, my_int{my_int}, my_string{my_string} {}
-
-    void print()
-    {
-        std::cout << "INT: " << my_int << "CHAR: " << my_char << "FLOAT: " << my_float  << "STRING: " << my_string << std::endl;
-    } 
-
-        float my_float;
-        char my_char;
-        int my_int; 
-        std::string my_string; 
-};
-
 
 // TEST(TestVectorPublicMethods, TestVectorEmplaceBack)
 // {
@@ -440,7 +418,6 @@ class DummyClass
 
 //     for(auto it = myVector.begin(); it != myVector.end(); ++it) 
 //     {     
-//         // std::cout << p << std::endl;
 //         EXPECT_EQ( *it, assign_val);  
 //     }
 // }
@@ -465,7 +442,6 @@ class DummyClass
 
 //     for(auto it = myVector.begin(); it != myVector.end(); ++it) 
 //     {     
-//         // std::cout << p << std::endl;
 //         EXPECT_EQ( *it, assign_val);  
 //     }
 // }

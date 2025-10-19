@@ -1,4 +1,4 @@
-.PHONY: install_deps, config, build, clean_build, clean_bin, clean_conan, clean_all,  test,
+.PHONY: install_deps, config, build, clean_build, clean_bin, clean_conan, clean_all,  test, test_ci
 
 
 install_deps:
@@ -12,7 +12,10 @@ build: config
 	cmake --build . --preset=debug
 
 test:
-	cd ./build && ctest
+	./bin/dsna_unit_tests
+
+test_ci:
+	cd ./build && ctest --test-arguments="--gtest_color=yes"
 
 clean_all:
 	rm -rf ./bin/*

@@ -1,50 +1,33 @@
-#include <gtest/gtest.h>
-#include "deque.hpp"
+// std 
 #include <iostream>
+
+// GTest
+#include <gtest/gtest.h>
+
+// Local
+#include "deque.hpp"
+
 
 using namespace structures;
 
-// template<typename T, typename... Args>
-// Vector<T> build_vector(Args &&... args)
+
+// TEST(TestDeque, DequeCreation)
 // {
-//     Vector<T> test_vector {args...};
 
-//     return test_vector;
-// } 
+//     Block<int> blk; 
 
-// template <typename T>
-// void print_vector(Vector<T>& vector)
-// {   
-//     for(auto iter = vector.begin(); iter != vector.end(); iter++)
-//     {
-//         std::cout<< *iter << std::endl;
-//     }
+//     blk.push_back(1);
+//     blk.push_back(2);
+//     blk.push_back(3);
+//     blk.push_back(4);
+//     blk.push_back(5);
+
+//     // Vector<int> vec = build_vector<int>(0, 1,2,3,4,5,6,7,8,9);
+
+//     // for(int idx =0 ; idx < 10; idx++)
+//     // {
+//     //     EXPECT_EQ(vec[idx], idx);
+//     // }
+
+//     // EXPECT_TRUE(true);
 // }
-
-TEST(TestDeque, DequeCreation)
-{
-
-    Block<int> blk; 
-
-    blk.push_back(1);
-    blk.push_back(2);
-    blk.push_back(3);
-    blk.push_back(4);
-    blk.push_back(5);
-
-
-    for (size_t idx = 0; idx < 5; ++idx)
-    {
-        std::cout << blk.pop_back() << std::endl;
-    }
-
-
-    // Vector<int> vec = build_vector<int>(0, 1,2,3,4,5,6,7,8,9);
-
-    // for(int idx =0 ; idx < 10; idx++)
-    // {
-    //     EXPECT_EQ(vec[idx], idx);
-    // }
-
-    // EXPECT_TRUE(true);
-}

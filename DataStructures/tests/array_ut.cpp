@@ -7,7 +7,7 @@
 // Gtest
 #include <gtest/gtest.h>
 
-// local 
+// Local 
 #include "array.hpp"
 
 
