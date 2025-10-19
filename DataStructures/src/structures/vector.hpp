@@ -266,11 +266,25 @@ public:
 
     Vector(std::initializer_list<T> il)
     {
-        array = new T[il.size()];
-        for(auto it=il.begin(); it != il.end(); ++it)
+        const size_t list_size = il.size();
+
+        if(list_size == 0 )
         {
-            this->push_back(*it);
+            return;
         }
+    
+        array = new T[list_size];
+        
+        size_t idx = 0; 
+        for(auto it=il.begin(); it != il.end(); ++it)
+        {   
+            array[idx] = *it;
+            ++idx;
+        }
+
+        cur_capacity = list_size;
+        cur_size = list_size;
+        current = &array[list_size-1];
     }
 
     ~Vector() { delete[] array; }
@@ -280,7 +294,46 @@ public:
      * Capacity Methods
      */
     size_t size() { return cur_size; }
-    void resize(size_t count, T value=0)
+
+    void resize(size_t count)
+    {
+
+        // Handle Edge Condition
+        if(count == 0)
+        {
+            delete[] array;
+            array = nullptr;
+            cur_size = 0; 
+            cur_capacity = 0; 
+            current = nullptr;
+            return;
+        }
+
+        // Allocate New Vector of Size Count
+        T* tmp_array = new T[count];
+
+        size_t to_copy = (cur_size < count) ? cur_size : count; 
+
+        for(size_t i=0; i < to_copy; ++i)
+        {
+            tmp_array[i] = array[i];
+        }
+
+        for(size_t i=to_copy; i < count; ++i)
+        {
+            tmp_array[i] = T();
+        }
+
+
+        delete[] array;
+        array = tmp_array;
+
+        cur_size = count;
+        cur_capacity = count;
+        current = (count ==0) ? nullptr: &array[count-1];
+    };
+
+    void resize(size_t count, T value)
     {
         if(cur_size > count)
         {
@@ -303,7 +356,6 @@ public:
                 {
                     tmp_array[i] = value;
                 }
-
             }
             delete[] array;
             array = tmp_array;
@@ -321,7 +373,7 @@ public:
         else if (n > cur_capacity)
         {
             T* tmp_array = new T[n];
-            for(int i=0; i< n; i++) { tmp_array[i] = array[i]; }
+            for(int i=0; i< cur_capacity; i++) { tmp_array[i] = array[i]; }
             delete[] array;
             array = tmp_array;
             cur_capacity = n;
@@ -436,12 +488,12 @@ public:
     {
         if(cur_size == 0)
         {
-            cur_capacity++;
+            cur_capacity = 1;
             array = new T[cur_capacity];
 
-            array[cur_size] = data;
-            current = &array[cur_size];
-            cur_size++;
+            array[0] = data;
+            current = &array[0];
+            cur_size = 1;
             return;
         }
 
@@ -450,7 +502,7 @@ public:
             T* tmp_arr = new T[2 * cur_capacity];
 
             // Move All Data from previous array to tmp array
-            for(int i=0; i<=cur_capacity; i++) { tmp_arr[i] = array[i]; }
+            for(int i=0; i<cur_capacity; i++) { tmp_arr[i] = array[i]; }
 
             // Update Capacity, Free prev array, & Assign tmp ptr to array
             cur_capacity *= 2;

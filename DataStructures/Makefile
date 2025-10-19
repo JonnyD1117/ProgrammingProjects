@@ -1,4 +1,4 @@
-.PHONY: install_deps, config, build, clean_build, clean_bin, clean_conan, clean_all,  test, test_ci
+.PHONY: install_deps, config, build, clean_build, clean_bin, clean_conan, clean,  test, test_ci
 
 
 install_deps:
@@ -12,15 +12,17 @@ build: config
 	cmake --build . --preset=debug
 
 test:
-	./bin/dsna_unit_tests
+	./bin/unit_tests
 
 test_ci:
 	cd ./build && ctest --test-arguments="--gtest_color=yes"
 
-clean_all:
+clean:
 	rm -rf ./bin/*
 	rm -rf ./build/*
 	rm -rf ./conan/*
+	rm ./build/.ninja_log
+	rm ./build/.ninja_deps
 
 clean_bin:
 	rm -rf ./bin/*

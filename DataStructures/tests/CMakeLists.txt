@@ -4,7 +4,7 @@
 
 include(GoogleTest)
 
-set( target dsna_unit_tests ) 
+set( target unit_tests ) 
 
 set( libs 
         GTest::gtest 
