@@ -1,13 +1,18 @@
 
-set( target emulator )
+
+
+add_subdirectory(6502)
+add_subdirectory(devices)
+
+
+set( target atari800 )
 
 set (sources 
     main.cpp
-    emulator.cpp
 )
 
 set( libs 
-
+    # 6502
 )
 
 # Compile Library

@@ -1,6 +1,5 @@
 [requires]
 gtest/1.16.0
-yaml-cpp/0.8.0
 [generators]
 CMakeDeps
 CMakeToolchain
