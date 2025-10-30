@@ -1,5 +1,7 @@
 [requires]
 gtest/1.16.0
+ftxui/6.0.2
+ncurses/6.5
 [generators]
 CMakeDeps
 CMakeToolchain

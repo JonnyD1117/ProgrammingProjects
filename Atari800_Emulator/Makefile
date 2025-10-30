@@ -12,7 +12,7 @@ build: config
 	cmake --build . --preset=debug
 
 run:
-	./bin/emulator
+	./bin/atari800
 
 test:
 	cd ./build && ctest

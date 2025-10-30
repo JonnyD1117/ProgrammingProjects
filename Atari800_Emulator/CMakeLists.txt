@@ -6,7 +6,8 @@ project(Atari800_Emulator LANGUAGES CXX)
 enable_testing()
 
 find_package(GTest  REQUIRED)
+# find_package(Curses REQUIRED)
 
 # Add Project Sources & Tests
-# add_subdirectory( src )
+add_subdirectory( src )
 add_subdirectory( tests )
