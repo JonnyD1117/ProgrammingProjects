@@ -3,15 +3,12 @@ set( target cpp_argument_parser_unit_tests )
 
 set( source
     main.cpp
+    test_parser_UT.cpp
 )
 
-add_library(screen_tests OBJECT test_parser_UT.cpp)
-
-target_link_libraries(screen_tests PUBLIC GTest::gtest GTest::gtest_main)
-
-
 set( libs 
-
+    GTest::gtest 
+    GTest::gtest_main
 )
 
 add_executable( ${target} ${source} )

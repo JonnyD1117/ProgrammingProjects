@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-TEST(ScreenDisplay, DummyTest)
+TEST(ArugmentParserUnitTest, DummyTest)
 {
     EXPECT_TRUE(true);
 }
