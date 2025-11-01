@@ -3,7 +3,7 @@
 #include <string>
 
 
-int main() 
+int main(int argc, char *argv[]) 
 {
     std::string path = "/home/indy/repos/6502-Emulator/src/assembler/programs/test.S";
     Assembler assem(path);

@@ -1,0 +1,3 @@
+# GTIA
+
+CTIA/GTIA is a television interface chip. ANTIC directly controls most of CTIA/GTIA's operations, but the 6502 CPU/microprocessor can be programmed to intercede and control some or all of CTIA/GTIA's functions. CTIA/GTIA converts the digital commands from ANTIC (or the 6502 CPU/microprocessor) into a video signal that goes to the TV set or monitor. CTIA/GTIA also adds some factors of its own, such as colour values, sprites (players-missiles in Atari's vocabulary) graphics, and collision detection. Games ordinarily requiring 48 KiB of RAM or more to handle complicated animation can be done in 16 Kib of RAM on machines with sprites (players-missiles in Atari's vocabulary).

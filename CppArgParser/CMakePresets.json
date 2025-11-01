@@ -1,0 +1,57 @@
+{
+    "version": 4,
+    "cmakeMinimumRequired": {
+      "major": 3,
+      "minor": 28,
+      "patch": 0
+    },
+    "configurePresets": [
+      {
+        "name": "default",
+        "displayName": "Default ",
+        "description": "Default settings for both Debug & Release",
+        "generator": "Ninja",
+        "hidden": true,
+        "binaryDir": "${sourceDir}/build",
+        "cacheVariables": {
+          "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/bin",
+          "CMAKE_CXX_COMPILER": "clang++",
+          "CMAKE_CXX_STANDARD": "23",
+          "CMAKE_CXX_STANDARD_REQUIRED": "ON",
+          "CMAKE_EXPORT_COMPILE_COMMANDS" : "ON",
+          "CMAKE_CXX_FLAGS": "-fdiagnostics-color=always -fsantize=address"
+        }
+      },
+      {
+        "name": "release",
+        "inherits": "default",
+        "displayName": "Release",
+        "description": "Use Conan toolchain and Release build type",
+        "cacheVariables": {
+          "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/conan/build/Release/generators/conan_toolchain.cmake",
+          "CMAKE_BUILD_TYPE": "Release"
+        }
+      },
+      {
+        "name": "debug",
+        "inherits": "default",
+        "displayName": "Debug",
+        "description": "Use Conan toolchain and ebug build type",
+        "cacheVariables": {
+          "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/conan/build/Debug/generators/conan_toolchain.cmake",
+          "CMAKE_BUILD_TYPE": "Debug"
+        }
+      }
+    ],
+    "buildPresets": [
+      {
+        "name": "release",
+        "configurePreset": "release"
+      },
+      {
+        "name": "debug",
+        "configurePreset": "debug"
+      }
+    ]
+  }
+  

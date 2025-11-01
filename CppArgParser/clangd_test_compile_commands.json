@@ -1,0 +1,14 @@
+// [
+// {
+//   "directory": "/home/indy/repos/6502-Emulator/build",
+//   "command": "/usr/bin/clang++ -I/home/indy/repos/6502-Emulator/src -m64 -fdiagnostics-color=always -O3 -DNDEBUG -std=gnu++23 @CMakeFiles/emulator.dir/main.cpp.o.modmap -o CMakeFiles/emulator.dir/main.cpp.o -c /home/indy/repos/6502-Emulator/main.cpp",
+//   "file": "/home/indy/repos/6502-Emulator/main.cpp",
+//   "output": "CMakeFiles/emulator.dir/main.cpp.o"
+// },
+// {
+//   "directory": "/home/indy/repos/6502-Emulator/build",
+//   "command": "/usr/bin/clang++ -I/home/indy/repos/6502-Emulator/src -m64 -fdiagnostics-color=always -O3 -DNDEBUG -std=gnu++23 @src/CMakeFiles/6502_emulator.dir/emulator.cpp.o.modmap -o src/CMakeFiles/6502_emulator.dir/emulator.cpp.o -c /home/indy/repos/6502-Emulator/src/emulator.cpp",
+//   "file": "/home/indy/repos/6502-Emulator/src/emulator.cpp",
+//   "output": "src/CMakeFiles/6502_emulator.dir/emulator.cpp.o"
+// }
+// ]

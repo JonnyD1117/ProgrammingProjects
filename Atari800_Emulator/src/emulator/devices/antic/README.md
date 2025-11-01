@@ -1,0 +1,3 @@
+# ANTIC
+
+ANTIC is a microprocessor dedicated to the preparation of the video signal. It is a true microprocessor; it has an instruction set, a program called "the display list", and data. The display list and the display data are written into RAM by the 6502 CPU/microprocessor. ANTIC retrieves this information from RAM using Direct Memory Access (DMA). It processes the higher-level instructions in the display list and translates these instructions into a real-time stream of simple instructions to CTIA/GTIA.

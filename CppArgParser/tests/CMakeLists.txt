@@ -1,20 +1,17 @@
-
-# Create Sub-System Test Libraries
-add_subdirectory( assembler )
-add_subdirectory( atari800 )
-add_subdirectory( screen )
-
 # Build Test Executable
-set( target atari800_unit_tests ) 
+set( target cpp_argument_parser_unit_tests ) 
 
 set( source
     main.cpp
 )
 
+add_library(screen_tests OBJECT test_parser_UT.cpp)
+
+target_link_libraries(screen_tests PUBLIC GTest::gtest GTest::gtest_main)
+
+
 set( libs 
-    assembler_tests
-    atari_tests
-    screen_tests
+
 )
 
 add_executable( ${target} ${source} )
