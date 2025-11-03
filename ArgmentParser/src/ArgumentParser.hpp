@@ -12,7 +12,6 @@
 #include <variant>
 #include <vector>
 
-
 // Container to hold ALL Option Information and value
 struct CliOption
 {
@@ -26,6 +25,8 @@ struct CliOption
         return std::format(" --{} \t : {}", m_name, m_doc);
     }
 };
+
+
 
 
 class ArgumentParser
@@ -106,7 +107,7 @@ class ArgumentParser
 
 
     template<typename T>
-    void add_argument(const std::string& name, T default_value, bool required=false, const std::string& doc="")
+    void add_argument(const std::string& name, T default_value, const std::string& doc="", bool required=false)
     {
         // Handle Illegal Override of "help" argument
         if(name == "help" || name == "h")
@@ -122,14 +123,11 @@ class ArgumentParser
         }   
         else
         {
-            // Does Not Exist
             m_options.emplace(name, CliOption{name, default_value, required, doc});
         }   
 
-        // 
         m_arguments_added = true;
     }
-
 
     template<typename T>
     T get(const std::string& name)
@@ -143,7 +141,6 @@ class ArgumentParser
 
         return std::get<T>(opt.m_value);
     }
-
 
     void print_usage()
     {
@@ -165,10 +162,36 @@ class ArgumentParser
         {
             if(value.has_value())
             {
+                std::string val = value.value();
+
                 if(m_options.find(name) != m_options.end())
                 {
-                    m_options[name].m_value = value.value();
+                    if(std::holds_alternative<int>(m_options[name].m_value))
+                    {
+                        m_options[name].m_value = std::stoi(val);
+                    }
+                    else if(std::holds_alternative<double>(m_options[name].m_value))
+                    {
+                        m_options[name].m_value = std::stod(val);
+                    }
+                    else
+                    {
+                        m_options[name].m_value = value.value();
+                    }                    
                 }
+            }
+            else
+            {
+                // Handle Boolean Flag
+                if(m_options.find(name) != m_options.end())
+                {
+                    if(std::holds_alternative<bool>(m_options[name].m_value))
+                    {
+                        bool truth_ness = std::get<bool>(m_options[name].m_value);
+                        m_options[name].m_value = !truth_ness;
+                    }
+                }
+
             }
         }
     }
@@ -176,21 +199,6 @@ class ArgumentParser
     bool containsOptPrefix(const std::string& argument)
     {
         return (argument.substr(0, m_prefix.length()) == m_prefix) ? true : false;
-    }
-
-    bool isInteger()
-    {
-        return true;
-    }
-
-    bool isDouble()
-    {
-        return true;
-    }
-
-    bool isString()
-    {
-        return true;
     }
     
     bool m_arguments_added     {false};

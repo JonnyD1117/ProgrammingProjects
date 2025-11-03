@@ -1,4 +1,4 @@
-set(target CppArgumentParser)
+set(target ArgumentParser)
 
 set(sources
     main.cpp

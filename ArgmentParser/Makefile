@@ -14,7 +14,7 @@ build: config
 	cmake --build . --preset=debug
 
 run:
-	./bin/CppArgumentParser --test1 3
+	./bin/ArgumentParser --test_int 3 --test_double 5.25 --test_string whatever_123 --test_bool
 
 test:
 	cd ./build && ctest
