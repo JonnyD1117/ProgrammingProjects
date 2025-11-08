@@ -4,6 +4,6 @@ set(sources
     main.cpp
 )
 
-add_executable(${target} ${sources})
+add_library(${target} STATIC ${sources})
 target_include_directories(${target} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 

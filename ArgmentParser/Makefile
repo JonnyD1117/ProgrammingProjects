@@ -14,10 +14,10 @@ build: config
 	cmake --build . --preset=debug
 
 run:
-	./bin/ArgumentParser --test_int 3 --test_double 5.25 --test_string whatever_123 --test_bool
+	./bin/ArgumentParser --test_int 3 --test_double 5.25 --test_string whatever_123 --test_bool --h
 
 test:
-	cd ./build && ctest
+	cd ./build && ctest --verbose
 
 autogen: 
 	python3 ./src/autogen/instruction_set.py

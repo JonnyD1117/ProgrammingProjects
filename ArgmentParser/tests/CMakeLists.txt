@@ -9,6 +9,7 @@ set( source
 set( libs 
     GTest::gtest 
     GTest::gtest_main
+    ArgumentParser
 )
 
 add_executable( ${target} ${source} )
