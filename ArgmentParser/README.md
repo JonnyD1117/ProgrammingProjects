@@ -8,11 +8,15 @@ This project is a small "helper" project. I have always wanted to make a thin ar
 - [x] Handle passing Integers
 - [x] Handle passing Doubles 
 - [x] Handle passing String
-- [ ] Handle passing Booleans
+- [ ] Handle passing Booleans 
 - [x] Helpful Usage screen when `--help` or `--h` are passed (these are **reserved** and cannot be overriden)
 - [ ] CLI explicit assignment (`--test_value=52`)
-- [ ] `--config` option to enable YAML or JSON configuration which the CLI can manually override 
-- [ ] Coexistance of Long & Short cli options
+- [x] Support manual adding of YAML || Json Configs (e.g. `add_config(conf_path);`)
+  - [x] YAML Config Parsing
+  - [ ] Json Config Parsing
+- [ ] Automatically set config file by using `--config <file-path>`
+- [ ] Ensure manually arguments `--my_var 42` can override an option set in a config (either via `--config` || `add_config()`)
+- [ ] Support short & long option prefixes (e.g. `--var` || `-v`) automatically
 - [ ] Python-like Argument Groups (Group arguments into groups)
 - [ ] Python-like REQUIRED arguments
 - [ ] Python-like sub-parser mechanism

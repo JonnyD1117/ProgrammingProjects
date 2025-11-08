@@ -1,16 +1,19 @@
 #pragma once 
 
 // std
+#include <expected>
 #include <filesystem>
 #include <iostream>
 #include <format>
 #include <string>
 #include <utility>
-#include <unordered_map>
 #include <vector>
 
 // yaml-cpp
 #include <yaml-cpp/yaml.h>
+
+// local 
+#include "OptionTypes.hpp"
 
 // Aliased Namespaces
 namespace fs = std::filesystem;
@@ -37,54 +40,35 @@ class YamlSchema
         validateConfig(config_root);
     }
 
-    std::unordered_map<std::string, YAML::Node> get_valid_nodes()
+    std::vector<CliOption> get_valid_options()
     {
-        return m_validNodes;
+        return m_validOpts;
     }
 
     private:
 
-    void validateConfig(YAML::Node& node)
+    void validateConfig(const YAML::Node& node)
     {
-        // Check if 'options' is defined
-        if(!node["options"].IsDefined())
+        // Extract Option Node (type_map -> sequence)
+        const YAML::Node option_node = node["options"];
+
+        // Option Map -> Individual Option Sequences
+        for (auto kv : option_node) 
         {
-            throw std::runtime_error(std::format("Yaml Validation FAILED! Schema found no Sequence name 'options:' in YAML config!"));
+            auto name  = kv.first.as<std::string>(); // Option Name
+            auto entry = kv.second[0];               // Option Map to Values
+
+            // Extract Option State
+            std::string value = entry["value"].as<std::string>();           
+            std::string help  = entry["help"].as<std::string>();
+            bool        req   = entry["required"].as<bool>();
+
+            // Add
+            m_validOpts.emplace_back(name, value, req, help);
         }
-
-        option_node = node["options"];
-
-        if(option_node.IsSequence() || option_node.IsScalar())
-        {
-            for(const auto& kv : option_node)
-            {
-                std::string name = kv.first.as<std::string>();
-                YAML::Node  node = kv.second;
-
-                if(node.IsScalar())
-                {
-                    // Option Node is a LEAF 
-                    m_validNodes[name] = node;
-                }
-                else
-                {
-                    throw std::runtime_error("YAML Validation FAILED: Schema detected that option map:  (e.g. key : value) is NOT a leaf in config tree");
-                }
-            }
-        }
-        else
-        {
-            throw std::runtime_error("YAML Validation FAILED: Schema detected that option list is EMPTY || is a Map and not a sequence/scalar");
-        }
-
-        
-
-        // Detect Option Node 
-        // option_node = whatever
     }
 
     YAML::Node config_root {};
-    YAML::Node option_node {};
 
-    std::unordered_map<std::string, YAML::Node> m_validNodes {};    
+    std::vector<CliOption> m_validOpts {};    
 };

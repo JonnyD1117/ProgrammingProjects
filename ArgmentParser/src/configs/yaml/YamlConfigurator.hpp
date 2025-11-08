@@ -3,6 +3,8 @@
 // std
 #include <iostream>
 #include <filesystem>
+#include <vector>
+#include <string>
 
 // yaml-cpp
 #include <yaml-cpp/yaml.h>
@@ -49,51 +51,7 @@ class YamlConfigurator : public IConfigurator
 
     void populate_options()
     {
-        // Iterator of each pair of var name & option YAML::Node
-        for(auto& [opt_name, node_sequence] : m_schema.get_valid_nodes() )
-        {
-            std::string opt_value = ""; 
-            std::string opt_help  = "";
-            bool opt_required = false;
-
-            // Ensure Node is a list (e.g. sequence)
-            if(!node_sequence.IsSequence())
-            {
-                throw std::runtime_error("Configuration FAILED! YAML Node is NOT of type Sequence");
-            }
-    
-            for(const auto& element : node_sequence)
-            {
-                // Ensure Node is Map (key:value) pair
-                if(!element.IsMap())
-                {
-                    throw std::runtime_error("Configuration FAILED! YAML Node is NOT of type MAP");
-                }
-
-                // Set CliOption values from YAML Node Mapping
-                const std::string key   = element.first.as<std::string>();
-
-                if(key == "value")
-                {
-                    opt_value = element.second.as<std::string>();
-                }
-                else if(key == "help")
-                {
-                    opt_help = element.second.as<std::string>();
-                }
-                else if(key == "required")
-                {
-                    opt_required = element.second.as<bool>();
-                }
-                else
-                {
-                    // Do Nothing
-                }
-            }
-
-            // Populate Config Option
-            m_configOptions.emplace_back(opt_name, opt_value, opt_required, opt_help);
-        }
+        m_configOptions = m_schema.get_valid_options();
     }
 
     YamlSchema m_schema;

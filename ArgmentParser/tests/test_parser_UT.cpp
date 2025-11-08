@@ -189,30 +189,32 @@ TEST(TestArugmentParser, TestMixedOption)
     // EXPECT_TRUE(value_bool);
 }
 
-// TEST(TestArgumentParser, TestYAMLConfigFileOption)
-// {
-//     std::vector<std::string> args = { 
-//                                         "./ArgumentParser",
+TEST(TestArgumentParser, TestYAMLConfigFileOption)
+{
+    std::vector<std::string> args = { 
+                                        "./ArgumentParser", "--help"
 
-//                                     };
+                                    };
 
-//     std::vector<char*> cli_args = createCmdLineInputs(args);
+    std::vector<char*> cli_args = createCmdLineInputs(args);
 
-//     std::string confPath = "/home/indy/repos/ProgrammingProjects/ArgmentParser/tests/data/test_config1.yml";
+    std::string confPath = "/home/indy/repos/ProgrammingProjects/ArgmentParser/tests/data/test_config1.yml";
 
-//     ArgumentParser parser;
-//     parser.add_config( confPath );
-//     parser.parse_options(cli_args.size(), cli_args.data());
+    ArgumentParser parser;
+    parser.add_config( confPath );
 
-//     // Extract argument value
-//     std::string my_string = parser.get<std::string>("my_string");
-//     int         my_int    = parser.get<int>("my_int");
-//     double      my_double = parser.get<double>("my_double");
-//     bool        my_bool   = parser.get<bool>("my_bool");
+    // Last thing to Perform (e.g after add_config() && add_argument())
+    parser.parse_options(cli_args.size(), cli_args.data());
 
-//     // Test 
-//     EXPECT_EQ(my_string, "testing_1234");
-//     EXPECT_EQ(my_int,    120);
-//     EXPECT_EQ(my_double, 123.456);
-//     EXPECT_TRUE(my_bool);
-// }
+    // Extract argument value
+    std::string my_string = parser.get<std::string>("my_string");
+    int         my_int    = parser.get<int>("my_int");
+    double      my_double = parser.get<double>("my_double");
+    bool        my_bool   = parser.get<bool>("my_bool");
+
+    // Test 
+    EXPECT_EQ(my_string, "testing_1234");
+    EXPECT_EQ(my_int,    120);
+    EXPECT_EQ(my_double, 123.456);
+    EXPECT_TRUE(my_bool);
+}
