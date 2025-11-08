@@ -3,6 +3,7 @@
 
 // std 
 #include <iostream>
+#include <format>
 #include <string>
 #include <vector>
 
@@ -123,13 +124,45 @@ TEST(TestArugmentParser, TestStringOption)
     EXPECT_EQ(value_3, "default_string");
 }
 
+// TEST(TestArugmentParser, TestBooleanOption)
+// {
+//     std::vector<std::string> args = { 
+//                                         "./ArgumentParser",
+//                                         "--test_bool1",
+//                                         "--test_bool2",
+//                                     };
+
+//     std::vector<char*> cli_args = createCmdLineInputs(args);
+
+//     ArgumentParser parser;
+//     parser.add_argument("test_bool1",      false,  "Test Boolean1 Handling");
+//     parser.add_argument("test_bool2",      true, "Test Boolean2 Handling");
+//     parser.add_argument("test_bool_true",  true,  "Test Boolean True Handling");
+//     parser.add_argument("test_bool_false", false, "Test Boolean False Handling");
+
+//     parser.parse_options(cli_args.size(), cli_args.data());
+
+//     // Extract argument value
+//     bool value_bool1 = parser.get<bool>("test_bool1");
+//     bool value_bool2 = parser.get<bool>("test_bool2");
+//     bool value_boolt = parser.get<bool>("test_bool_true");
+//     bool value_boolf = parser.get<bool>("test_bool_false");
+
+//     // Test 
+//     EXPECT_TRUE (value_bool1);
+//     EXPECT_FALSE(value_bool2);
+//     EXPECT_TRUE (value_boolt);
+//     EXPECT_FALSE(value_boolf);
+// }
+
 TEST(TestArugmentParser, TestMixedOption)
 {
     std::vector<std::string> args = { 
                                         "./ArgumentParser",
                                         "--test_int",   "42",
                                         "--test_double","69.0",
-                                        // "--test_string"," testing_123",
+                                        "--test_string","testing_123",
+                                        "--test_bool"
                                     };
 
     std::vector<char*> cli_args = createCmdLineInputs(args);
@@ -139,7 +172,7 @@ TEST(TestArugmentParser, TestMixedOption)
     parser.add_argument("test_int",    42,           "Test Integer Handling");
     parser.add_argument("test_double", 69.0,         "Test Double Handling");
     parser.add_argument("test_string", "LoremIpsum", "Test String Handling");
-    // parser.add_argument("test_bool",   false, "Test Boolean Handling");
+    parser.add_argument("test_bool",   false,        "Test Boolean Handling");
 
     parser.parse_options(cli_args.size(), cli_args.data());
 
@@ -147,15 +180,39 @@ TEST(TestArugmentParser, TestMixedOption)
     std::string value_str    = parser.get<std::string>("test_string");
     int         value_int    = parser.get<int>("test_int");
     double      value_double = parser.get<double>("test_double");
-    // bool        value_bool   = parser.get<bool>("test_bool");
+    bool        value_bool   = parser.get<bool>("test_bool");
 
     // Test 
-    EXPECT_EQ(value_str,    "LoremIpsum");
+    EXPECT_EQ(value_str,    "testing_123");
     EXPECT_EQ(value_int,    42);
     EXPECT_EQ(value_double, 69.0);
+    // EXPECT_TRUE(value_bool);
 }
 
-// TEST(TestArugmentParser, TestBooleanOption)
+// TEST(TestArgumentParser, TestYAMLConfigFileOption)
 // {
-//     EXPECT_TRUE(true);
+//     std::vector<std::string> args = { 
+//                                         "./ArgumentParser",
+
+//                                     };
+
+//     std::vector<char*> cli_args = createCmdLineInputs(args);
+
+//     std::string confPath = "/home/indy/repos/ProgrammingProjects/ArgmentParser/tests/data/test_config1.yml";
+
+//     ArgumentParser parser;
+//     parser.add_config( confPath );
+//     parser.parse_options(cli_args.size(), cli_args.data());
+
+//     // Extract argument value
+//     std::string my_string = parser.get<std::string>("my_string");
+//     int         my_int    = parser.get<int>("my_int");
+//     double      my_double = parser.get<double>("my_double");
+//     bool        my_bool   = parser.get<bool>("my_bool");
+
+//     // Test 
+//     EXPECT_EQ(my_string, "testing_1234");
+//     EXPECT_EQ(my_int,    120);
+//     EXPECT_EQ(my_double, 123.456);
+//     EXPECT_TRUE(my_bool);
 // }

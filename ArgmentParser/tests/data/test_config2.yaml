@@ -1,0 +1,23 @@
+version: 1
+name: TestConfig2
+options:
+  my_bool: 
+    - value: true
+      type: bool
+      help: "Some help string to document"
+      required: false
+
+  my_int: 
+    - value: 120
+      help: "Some help string to document"
+      required: false
+
+  my_double: 
+    - value: 123.456
+      help: "Some help string to document"
+      required: false
+
+  my_string: 
+    - value: "test_1234"
+      help: "Some help string to document"
+      required: false

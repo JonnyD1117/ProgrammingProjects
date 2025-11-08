@@ -1,57 +1,40 @@
 # pragma once 
 
 // std
-#include <any>
 #include <iostream>
+#include <filesystem>
 #include <format>
-#include <print>
+#include <memory>
 #include <optional>
+#include <print>
 #include <string>
 #include <unordered_map>
 #include <typeinfo>
 #include <variant>
 #include <vector>
 
-// Container to hold ALL Option Information and value
-struct CliOption
-{
-    std::string                                  m_name;
-    std::variant<int, double, std::string, bool> m_value;
-    bool                                         m_required;
-    std::string                                  m_doc;
+// local 
+#include "IConfigurator.hpp"
+#include "OptionTypes.hpp"
+#include "JsonConfigurator.hpp"
+#include "YamlConfigurator.hpp"
 
-    std::string toString()
-    {
-        return std::format(" --{} \t : {}", m_name, m_doc);
-    }
-};
-
-
+// Aliased Namespaces
+namespace fs = std::filesystem;
 
 
 class ArgumentParser
 {
     public:
+
     ArgumentParser()=default;
     ~ArgumentParser()=default;
 
     void parse_options(int argc, char* argv[])
     {
-        if(!m_arguments_added)
-        {
-            std::cout << "No Arguments have been added to parser using 'add_argument(name, default_value, help)' function!" << std::endl;
-            exit(EXIT_FAILURE);
-        }
+        // Convert Argv to more useful container
+        stringify_argv(argc, argv);
 
-
-        // Stringify ArgV        
-        for(size_t idx=0; idx<argc; idx++)
-        {
-            m_rawArgs.emplace_back(argv[idx]);
-        }
-
-        // Extract Executable Command (0th position)
-        m_command = m_rawArgs[0];
 
         std::string name;
         std::string value;
@@ -104,7 +87,47 @@ class ArgumentParser
         registerOptions();
     }
     
+    void add_config(const fs::path& path, const std::string& name="config", const std::string& doc ="" )
+    {
+        // Check that Config Exists
+        if(!fs::exists(path))
+        {
+            std::println("Argument: '{}' requires a 'path' to a configuration file! ", name);
+            std::println("  Path '{}' does not exist!", path.string());
+            exit(EXIT_FAILURE);
+        }
 
+        if(!path.has_extension())
+        {
+            std::println("Configuration file has NO file extension...");
+            exit(EXIT_FAILURE);
+        }
+        
+        // Initialize File Extension Specific Configurator
+        std::string ext = path.extension();
+        if(ext == ".yaml" || ext == ".yml")
+        {
+            m_config = std::make_unique<YamlConfigurator>();
+        }
+        else if(ext == "json")
+        {
+            m_config = std::make_unique<JsonConfigurator>();
+        }
+        else
+        {
+            std::println("Configuration file provided, of type {} is NOT supported. Please use .yaml or .json", ext);
+            exit(EXIT_FAILURE);
+        }
+
+        // Pass Config Path to Configurator
+        m_config->set_config(path);
+        
+        // Populate Arguments from Validated Options
+        for(auto& option : m_config->get_options())
+        {
+            add_argument(option);
+        }
+    }
 
     template<typename T>
     void add_argument(const std::string& name, T default_value, const std::string& doc="", bool required=false)
@@ -123,9 +146,13 @@ class ArgumentParser
         }   
         else
         {
-            m_options.emplace(name, CliOption{name, default_value, required, doc});
+            add_argument(CliOption{name, default_value, required, doc});
         }   
+    }
 
+    void add_argument(const CliOption& option)
+    {
+        m_options.emplace(option.m_name, option);
         m_arguments_added = true;
     }
 
@@ -144,7 +171,6 @@ class ArgumentParser
 
     void print_usage()
     {
-        
         std::println("\nUsage: {}\n", m_command);
         std::println("Options:");
         for(auto [key, opt] : m_options)
@@ -196,14 +222,28 @@ class ArgumentParser
         }
     }
 
+    void stringify_argv(int argc, char* argv[])
+    {
+        // Stringify ArgV        
+        for(size_t idx=0; idx<argc; idx++)
+        {
+            m_rawArgs.emplace_back(argv[idx]);
+        }
+
+        // Extract Executable Command (0th position)
+        m_command = m_rawArgs[0];
+    }
+
     bool containsOptPrefix(const std::string& argument)
     {
         return (argument.substr(0, m_prefix.length()) == m_prefix) ? true : false;
     }
-    
-    bool m_arguments_added     {false};
-    std::string m_command      {""};
-    const std::string m_prefix {"--"};
+
+
+    bool m_arguments_added                  {false};
+    std::string m_command                   {""};
+    const std::string m_prefix              {"--"};
+    std::unique_ptr<IConfigurator> m_config {nullptr};
 
     std::unordered_map<std::string, CliOption>                      m_options;
     std::vector<std::string>                                        m_rawArgs;

@@ -4,12 +4,15 @@ This project is a small "helper" project. I have always wanted to make a thin ar
 
 ## Features
 
-- [ ] Handle passing of (int, double, string, bool) values 
-- [ ] Simple and intuitive interfaces to extract values given in CLI within the C++ application
-- [ ] Python-like `add_argument()` interface to specify expected arguments
+- [x] Python-like `add_argument()` interface to specify expected arguments
+- [x] Handle passing Integers
+- [x] Handle passing Doubles 
+- [x] Handle passing String
+- [ ] Handle passing Booleans
+- [x] Helpful Usage screen when `--help` or `--h` are passed (these are **reserved** and cannot be overriden)
+- [ ] CLI explicit assignment (`--test_value=52`)
+- [ ] `--config` option to enable YAML or JSON configuration which the CLI can manually override 
+- [ ] Coexistance of Long & Short cli options
 - [ ] Python-like Argument Groups (Group arguments into groups)
 - [ ] Python-like REQUIRED arguments
-- [ ] Time/Interest permitting it would be cool to create a python-like sub-parser
-- [ ] `--config` option to enable YAML or JSON configuration which the CLI can manually override (enabling custom configurations) 
-- [ ] Helpful Usage screen when `--help` or `--h` are passed (these are **reserved** and cannot be overriden)
-
+- [ ] Python-like sub-parser mechanism
