@@ -1,34 +1,29 @@
-.PHONY: install_deps, config, build, clean_build, clean_bin, clean_conan, clean,  test, test_ci
+.PHONY: deps, config, build, clean  test, test_gdb, run
 
+# Compilation Mode: (release/debug)
+CMAKE_MODE ?=debug
+CONAN_MODE := $(shell echo $(CMAKE_MODE) | sed 's/./\U&/')
 
-install_deps:
-# 	CONAN_SYSREQUIRES_SUDO=1 conan install . --output-folder=conan --build=missing -c tools.system.package_manager:mode=install -s build_type=Release
-	CONAN_SYSREQUIRES_SUDO=1 conan install . --output-folder=conan --build=missing -c tools.system.package_manager:mode=install -s build_type=Debug
+deps:
+	CONAN_SYSREQUIRES_SUDO=1 conan install . --output-folder=conan --build=missing \
+	-c tools.system.package_manager:mode=install -s build_type=$(CONAN_MODE); \
 
 config:
-	cmake --preset=debug
+		cmake --preset=$(CMAKE_MODE);
 
 build: config
-	cmake --build . --preset=debug
+	cmake --build . --preset=$(CMAKE_MODE); 
+
+run: 
+	./bin/main
 
 test:
-	./bin/unit_tests
+	cd ./build && ctest
 
-test_ci:
-	cd ./build && ctest --test-arguments="--gtest_color=yes"
+test_gdb:
+	gdb ./bin/unit_tests
 
 clean:
-	rm -rf ./bin/*
+	rm -rf ./bin/* 
 	rm -rf ./build/*
-	rm -rf ./conan/*
-	rm ./build/.ninja_log
-	rm ./build/.ninja_deps
-
-clean_bin:
-	rm -rf ./bin/*
-
-clean_build:
-	rm -rf ./build/*
-
-clean_conan:
 	rm -rf ./conan/*
