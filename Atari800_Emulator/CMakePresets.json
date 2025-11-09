@@ -19,7 +19,10 @@
           "CMAKE_CXX_STANDARD": "23",
           "CMAKE_CXX_STANDARD_REQUIRED": "ON",
           "CMAKE_EXPORT_COMPILE_COMMANDS" : "ON",
-          "CMAKE_CXX_FLAGS": "-fdiagnostics-color=always"
+          "CMAKE_CXX_FLAGS": "-fdiagnostics-color=always -fsanitize=address"
+        },
+        "environment": {
+          "GTEST_COLOR": "1"
         }
       },
       {
@@ -36,7 +39,7 @@
         "name": "debug",
         "inherits": "default",
         "displayName": "Debug",
-        "description": "Use Conan toolchain and ebug build type",
+        "description": "Use Conan toolchain and Debug build type",
         "cacheVariables": {
           "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/conan/build/Debug/generators/conan_toolchain.cmake",
           "CMAKE_BUILD_TYPE": "Debug"

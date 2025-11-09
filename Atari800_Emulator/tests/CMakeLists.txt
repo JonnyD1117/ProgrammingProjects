@@ -24,4 +24,4 @@ target_link_libraries( ${target} PUBLIC ${libs} )
 include(GoogleTest)
 
 # Allow GTest to Register test with CTest
-gtest_discover_tests( ${target} )
+gtest_discover_tests( ${target} PROPERTIES ENVIRONMENT "GTEST_COLOR=$ENV{GTEST_COLOR}")
