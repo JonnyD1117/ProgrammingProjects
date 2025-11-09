@@ -1,4 +1,8 @@
-.PHONY: install_deps, config, build, run, clean_build, clean_bin, clean_conan, clean_all, clean_venv, test, site, serve, docs, venv, gdb
+.PHONY: deps, config, build, clean  test, test_gdb, run, venv run_gdb, site, serve, docs, venv
+
+# Compilation Mode: (release/debug)
+CMAKE_MODE ?=debug
+CONAN_MODE := $(shell echo $(CMAKE_MODE) | sed 's/./\U&/')
 
 venv:
 	@if [ ! -d .venv ]; then \
@@ -9,23 +13,33 @@ venv:
 		echo "Virtual environment already exists."; \
 	fi
 
-install_deps:
-	CONAN_SYSREQUIRES_SUDO=1 conan install . --output-folder=conan --build=missing -s build_type=Debug -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True
+deps:
+	CONAN_SYSREQUIRES_SUDO=1 conan install . --output-folder=conan --build=missing \
+	-c tools.system.package_manager:mode=install -s build_type=$(CONAN_MODE); \
 
 config:
-	cmake --preset=debug #default
+	cmake --preset=$(CMAKE_MODE);
 
 build: config
-	cmake --build . --preset=debug #default
+	cmake --build . --preset=$(CMAKE_MODE); 
 
 run:
 	./bin/my_app
 
-gdb: 
+run_gdb: 
 	gdb ./bin/my_app
 
 test:
 	cd ./build && ctest
+
+test_gdb:
+	gdb ./bin/unit_tests
+
+clean:
+	rm -rf ./bin/*
+	rm -rf ./build/*
+	rm -rf ./conan/*
+	rm -rf .venv/
 
 site:
 	firefox ./docs/.site/index.html
@@ -35,21 +49,3 @@ docs: venv
 
 serve:
 	bash -c "source .venv/bin/activate && mkdocs serve"
-
-clean_all:
-	rm -rf ./bin/*
-	rm -rf ./build/*
-	rm -rf ./conan/*
-	rm -rf .venv/
-
-clean_venv:
-	rm -rf .venv/
-
-clean_bin:
-	rm -rf ./bin/*
-
-clean_build:
-	rm -rf ./build/*
-
-clean_conan:
-	rm -rf ./conan/*

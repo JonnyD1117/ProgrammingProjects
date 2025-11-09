@@ -8,42 +8,52 @@
     "configurePresets": [
       {
         "name": "default",
-        "displayName": "Default (Release)",
-        "description": "Use Conan toolchain and Release build type",
+        "displayName": "Default ",
+        "description": "Default settings for both Debug & Release",
         "generator": "Ninja",
+        "hidden": true,
         "binaryDir": "${sourceDir}/build",
         "cacheVariables": {
-          "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/conan/build/Release/generators/conan_toolchain.cmake",
-          "CMAKE_BUILD_TYPE": "Release",
           "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/bin",
           "CMAKE_CXX_COMPILER": "clang++",
           "CMAKE_CXX_STANDARD": "23",
-          "CMAKE_EXPORT_COMPILE_COMMANDS" : "ON"
+          "CMAKE_CXX_STANDARD_REQUIRED": "ON",
+          "CMAKE_EXPORT_COMPILE_COMMANDS" : "ON",
+          "CMAKE_CXX_FLAGS": "-fdiagnostics-color=always -fsanitize=address"
+        },
+        "environment": {
+          "GTEST_COLOR": "1"
+        }
+      },
+      {
+        "name": "release",
+        "inherits": "default",
+        "displayName": "Release",
+        "description": "Use Conan toolchain and Release build type",
+        "cacheVariables": {
+          "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/conan/build/Release/generators/conan_toolchain.cmake",
+          "CMAKE_BUILD_TYPE": "Release"
         }
       },
       {
         "name": "debug",
-        "displayName": "Debug Build",
-        "description": "Use Conan toolchain and Debug build type",
         "inherits": "default",
+        "displayName": "Debug",
+        "description": "Use Conan toolchain and Debug build type",
         "cacheVariables": {
-          "CMAKE_BUILD_TYPE": "Debug",
-          "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/conan/build/Debug/generators/conan_toolchain.cmake"
+          "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/conan/build/Debug/generators/conan_toolchain.cmake",
+          "CMAKE_BUILD_TYPE": "Debug"
         }
       }
     ],
     "buildPresets": [
       {
-        "name": "default",
-        "configurePreset": "default"
+        "name": "release",
+        "configurePreset": "release"
       },
       {
         "name": "debug",
         "configurePreset": "debug"
-      },
-      {
-        "name": "test",
-        "configurePreset": "default"
       }
     ]
   }
