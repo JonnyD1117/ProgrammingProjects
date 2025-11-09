@@ -15,10 +15,10 @@ build: config
 	cmake --build . --preset=$(CMAKE_MODE); 
 
 test:
-	cd ./build && ctest --verbose
+	cd ./build && ctest
 
 test_gdb:
-	gdb ./bin/cpp_argument_parser_unit_tests
+	gdb ./bin/unit_tests
 
 clean:
 	rm -rf ./bin/*

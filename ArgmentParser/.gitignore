@@ -5,4 +5,4 @@ conan/
 
 # Ignore Generated User Presets
 CMakeUserPresets.json
-.vscode
+.vscode/
