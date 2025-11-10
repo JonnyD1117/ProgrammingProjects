@@ -1,10 +1,7 @@
-
-
-
-# add_subdirectory(6502)
-# add_subdirectory(devices)
+# Add Source Files
+add_subdirectory(6502)
+add_subdirectory(devices)
 add_subdirectory(screen)
-
 
 set( target atari800 )
 
@@ -13,8 +10,8 @@ set (sources
 )
 
 set( libs 
-    # 6502
-    screen
+    atari800_6502
+    atari800_screen
 )
 
 # Compile Library

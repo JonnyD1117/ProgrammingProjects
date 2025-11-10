@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-TEST(AssemblerTest, DummyTest)
+TEST(TestScreenSuite, TestDummyScreen)
 {
     EXPECT_TRUE(true);
 }

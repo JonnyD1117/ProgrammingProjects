@@ -1,9 +1,21 @@
+# Build Test Executable
+set( target unit_tests_atari800 ) 
 
-# Test DUmmy Library
-add_library(atari_tests OBJECT test_dummy_6502_UT.cpp)
+set( source
+    main.cpp
+    test_atari800_UT.cpp
+)
 
-target_link_libraries(atari_tests PUBLIC GTest::gtest GTest::gtest_main)
+set( libs 
+    GTest::gtest 
+    GTest::gtest_main
+)
 
-# Add Tests
-# add_subdirectory(6502)
-# add_subdirectory(devices)
+add_executable( ${target} ${source} )
+        
+target_link_libraries( ${target} PUBLIC ${libs} )
+
+include(GoogleTest)
+
+# Allow GTest to Register test with CTest
+gtest_discover_tests( ${target} PROPERTIES ENVIRONMENT "GTEST_COLOR=$ENV{GTEST_COLOR}")

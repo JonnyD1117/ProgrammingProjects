@@ -1,13 +1,15 @@
+// std
 #include <iostream>
-#include "assembler.hpp"
 #include <string>
 
+// local 
+#include "assembler.hpp"
 
 int main(int argc, char *argv[]) 
 {
-    std::string path = "/home/indy/repos/6502-Emulator/src/assembler/programs/test.S";
-    Assembler assem(path);
+    std::string cwd = std::string(PROJECT_SOURCE_DIR);   // Defined in CMAKE target_compile_definitions()
+    std::string path = cwd + "/sample_programs/test.S";
 
-    std::cout << "Hello 6502 Assembler" << std::endl;
+    Assembler assem(path);
     return 0;
 }

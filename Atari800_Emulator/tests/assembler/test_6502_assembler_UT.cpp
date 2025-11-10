@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-TEST(Atari_Dummy_Test, DummyTest)
+TEST(TestAssemblerTest, TestDummyAssembler)
 {
     EXPECT_TRUE(true);
 }

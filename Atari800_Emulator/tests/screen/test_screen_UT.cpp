@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-TEST(ScreenDisplay, DummyTest)
+TEST(TestScreenSuite, TestDummyScreen)
 {
     EXPECT_TRUE(true);
 }
