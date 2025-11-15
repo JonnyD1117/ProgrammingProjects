@@ -15,6 +15,7 @@
 
 // local 
 #include "IConfigurator.hpp"
+#include "OptionParser.hpp"
 #include "OptionTypes.hpp"
 #include "JsonConfigurator.hpp"
 #include "YamlConfigurator.hpp"
@@ -33,48 +34,13 @@ class ArgumentParser
     void parse_options(int argc, char* argv[])
     {
         // Convert Argv to more useful container
-        stringify_argv(argc, argv);
+        m_parser.parse_options(argc, argv);
 
-
-        std::string name;
-        std::string value;
-        bool nameSet   = false;
-
-        // Iterate Remaining Options ( 1 -> Nth positions)
-        for( auto it = m_rawArgs.begin()+1; it != m_rawArgs.end(); ++it)
+        m_optPairs = m_parser.getOptionStrings();
+        m_command  = m_parser.getCommand();
+    
+        for(auto& [name, _] : m_optPairs)
         {
-            // Check if Option contains a prefixed name ( e.g. --your_option)
-            if(!nameSet)
-            {
-                if(containsOptPrefix(*it))
-                {
-                    name = (*it).substr(m_prefix.length());
-                    nameSet = true;
-                }
-                else
-                {
-                    throw std::runtime_error("Bad Option: Cannot pass a value without binding to argument");
-                }
-            }
-            else
-            {
-                // Name is ALREADY set
-                if(containsOptPrefix(*it))
-                {
-                    // Handle Previous Name 
-                    m_optPairs.emplace_back(name, std::nullopt);
-
-                    name = (*it).substr(m_prefix.length());
-                    nameSet   = true;
-                }
-                else
-                {
-                    value = *it;
-                    m_optPairs.emplace_back(name, value);
-                    nameSet = false;
-                }
-            }    
-            
             // Prempt Execution if HELP option is added
             if(name == "help" || name == "h")
             {
@@ -82,6 +48,8 @@ class ArgumentParser
                 exit(EXIT_SUCCESS);
             }
         }
+
+        print_usage();
         
         // Build Option Tree
         registerOptions();
@@ -222,28 +190,11 @@ class ArgumentParser
         }
     }
 
-    void stringify_argv(int argc, char* argv[])
-    {
-        // Stringify ArgV        
-        for(size_t idx=0; idx<argc; idx++)
-        {
-            m_rawArgs.emplace_back(argv[idx]);
-        }
-
-        // Extract Executable Command (0th position)
-        m_command = m_rawArgs[0];
-    }
-
-    bool containsOptPrefix(const std::string& argument)
-    {
-        return (argument.substr(0, m_prefix.length()) == m_prefix) ? true : false;
-    }
-
-
     bool m_arguments_added                  {false};
     std::string m_command                   {""};
-    const std::string m_prefix              {"--"};
     std::unique_ptr<IConfigurator> m_config {nullptr};
+
+    OptionParser                                                    m_parser;
 
     std::unordered_map<std::string, CliOption>                      m_options;
     std::vector<std::string>                                        m_rawArgs;

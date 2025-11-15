@@ -1,4 +1,4 @@
-.PHONY: deps, config, build, clean  test, test_gdb, all
+.PHONY: deps, config, build, clean  test, test_gdb, test_verbose
 
 # Compilation Mode: (release/debug)
 CMAKE_MODE ?=debug
@@ -16,6 +16,9 @@ build: config
 
 test:
 	cd ./build && ctest
+
+test_verbose:
+	cd ./build && ctest --verbose
 
 test_gdb:
 	gdb ./bin/unit_tests

@@ -189,6 +189,33 @@ TEST(TestArugmentParser, TestMixedOption)
     // EXPECT_TRUE(value_bool);
 }
 
+TEST(TestArugmentParser, TestGluedOptions)
+{
+    std::vector<std::string> args = { 
+                                        "./ArgumentParser",
+                                        "--test_glued1=testing",
+                                        "--test_glued2=one_two_three",
+                                    };
+
+    std::vector<char*> cli_args = createCmdLineInputs(args);
+
+    // Create CLI Argument Parser
+    ArgumentParser parser;
+    parser.add_argument("test_glued1", "whatever",         "Test1 String Handling");
+    parser.add_argument("test_glued2", "should_be_useful", "Test2 String Handling");
+
+    // Parse Options
+    parser.parse_options(cli_args.size(), cli_args.data());
+
+    // Extract Options from Parser
+    std::string value_1 = parser.get<std::string>("test_glued1");
+    std::string value_2 = parser.get<std::string>("test_glued2");
+
+    // Test 
+    EXPECT_EQ(value_1, "testing");
+    EXPECT_EQ(value_2, "one_two_three");
+}
+
 TEST(TestArgumentParser, TestYAMLConfigFileOption)
 {
     std::vector<std::string> args = { 
