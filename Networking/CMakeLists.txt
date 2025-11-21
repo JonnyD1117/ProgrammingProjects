@@ -8,9 +8,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Required Packages
 find_package(GTest REQUIRED)
+find_package(cppzmq REQUIRED)
 
 # Add Project Sources
-# add_subdirectory( src )
+add_subdirectory( src )
 
 # Enable CTest
 enable_testing()

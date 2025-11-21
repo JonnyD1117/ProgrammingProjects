@@ -1,3 +1,7 @@
+
+add_subdirectory(bsd_sockets)
+# add_subdirectory(dns)
+# add_subdirectory(http)
+# add_subdirectory(tcp)
 # add_subdirectory(udp)
-add_subdirectory(tcp)
-add_subdirectory(http)
+# add_subdirectory(zmq)

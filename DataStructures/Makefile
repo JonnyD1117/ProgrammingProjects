@@ -1,4 +1,4 @@
-.PHONY: deps, config, build, clean  test, test_gdb, run
+.PHONY: deps config build clean test test_gdb
 
 # Compilation Mode: (release/debug)
 CMAKE_MODE ?=debug
@@ -13,9 +13,6 @@ config:
 
 build: config
 	cmake --build . --preset=$(CMAKE_MODE); 
-
-run: 
-	./bin/main
 
 test:
 	cd ./build && ctest

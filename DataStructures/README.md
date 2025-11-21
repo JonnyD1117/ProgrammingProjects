@@ -1,13 +1,39 @@
 # Data Structures & Algorithms
-This project is my own personal implemention of C++ STL data structures & algorithms. This is for academic purposes only and NOT for production use. 
+This project is my own personal implemention of C++ STL data structures & algorithms, to better learn the STL. 
 
-## Objective 
-The objective of this project is to implement Data Structures & Algorithms that conform to the C++ STL API as close as possible. The implementation details will obviously be different and are intended as a learning exercise to make test my understanding of not only DS & A but also Modern C++ constructs. It provides a very well defined mini-project with quantifiable deliverables. (e.g. I should be able to swap out STL data structures for my own without noticing any appreciable difference.) 
+## Requirements 
 
-Additionally, another important sub-goal that I have set is to try and fully test each implementation directly with a test suite designed to verify that each feature of the data structure conforms to the expected behavior as defined in the [C++ STL Reference](https://cplusplus.com/). These test are created via GoogleTest framework and while I do not consider them "required" to check a data structure as completed, implementing tests provides confidence as to the expected behavior under normal inputs one could expect to be given.
+ - CMake >= 3.28 (build system generator)
+ - Conan2  (package manager)
+ - Make (cli command executor)
+ - Ninja (build system)
 
-### Statement of Quality
-None of these implementations are going to be as clean or polished as the STL. (That is why we use the STL). The implementation for each Data structure are in varying states of completion or undergoing different types of refactors as time goes by; however, by and large, if an implementation is checked as completed in the following section. I have deemed it "useable" (NOT perfect).
+## Usage Instructions
+
+This project uses a `Makefile` as a quick and dirty scripting mechanism to run long commands; however, the underlying build system of this project is `Ninja`. At this point, I'm assuming that if you're this far, you understand how CMake projects work and could manaually build the project if necessary. This however, is dependent on installing all external dependencies first using the `Conan 2.0` package manager. This project will not build without satisfying the Conan dependencies, as these are used for things like `GTest`. 
+
+### Building the Project
+Assuming, you have all the build requirements installed and operating, to build and test this project `cd` into project root directory and execute the following make commands.
+
+```makefile
+
+# Clean all binaries and build artifacts
+make clean
+
+# Install Conan2 Dependencies
+make deps
+
+# Configure & Build Project CMake
+make config build
+
+# Run GTests
+make test
+
+# Feeling Adventurous? Do them all at one time!
+make clean deps config build test
+```
+
+NOTE: These `make` commands are just wrappers around standard Conan and CMake commands that could be run manually, please look at the `Makefile` in the root directory to discovery these commands directly.
 
 ## Data Structures Implemented
 - [x] Vector 
