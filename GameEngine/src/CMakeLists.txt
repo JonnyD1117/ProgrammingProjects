@@ -1,6 +1,19 @@
+###########################################
+#   Compile Platform Independent Libs
+###########################################
 #add_subdirectory( assets )
 add_subdirectory( engine )
 #add_subdirectory( tools )
+
+###########################################
+#   Compile Platform Dependent Libs
+###########################################
+# Support Cross-Platform Compilation (default to LINUX)
+# add_subdirectory( platform ) 
+
+###################################
+#   Compile Engine 
+###################################
 
 set(target dftd_game_engine)
 

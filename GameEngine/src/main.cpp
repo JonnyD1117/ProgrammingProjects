@@ -7,9 +7,7 @@ int main()
     OpenGlTutorial::Engine engine;
 
     // Run Application
-    int exit_code = engine.run();
+    [[maybe_unused]] int exit_code = engine.run();
 
-    return exit_code;
-
-    int x = 200;
+    return 0;
 }
