@@ -1,4 +1,4 @@
-set( target engine_mesh_formats)
+set( target engine_mesh_format_parsers)
 
 set( sources
     assimp_parser.cpp

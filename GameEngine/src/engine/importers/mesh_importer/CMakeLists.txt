@@ -13,7 +13,7 @@ set( headers
 )
 
 set (libs 
-    engine_mesh_formats
+    engine_mesh_format_parsers
     engine_types
 )
 

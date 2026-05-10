@@ -30,7 +30,7 @@ namespace OpenGlTutorial
     {
         public: 
 
-        MeshData(){}
+        MeshData()=default;
 
         // Require Move Semantics for Efficient ownership transfer from Import to MeshData Instance
         MeshData(std::vector<MeshVertex>&& vertices, 
