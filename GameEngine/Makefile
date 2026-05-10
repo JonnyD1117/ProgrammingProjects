@@ -21,7 +21,7 @@ config:
 	cmake --preset=$(CMAKE_MODE);
 
 build: config
-	cmake --build . --preset=$(CMAKE_MODE); 
+	cmake --build ./build --preset=$(CMAKE_MODE); 
 
 run:
 	./bin/my_app

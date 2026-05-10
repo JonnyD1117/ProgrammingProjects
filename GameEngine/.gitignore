@@ -1,6 +1,6 @@
 # Ignore Build, Dependency, & Binary Directories
-bin/
-build/
+bin/*
+build/*
 conan/
 
 # Ignore Generated User Presets
