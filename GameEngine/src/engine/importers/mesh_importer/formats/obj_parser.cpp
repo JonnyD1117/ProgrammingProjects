@@ -44,8 +44,8 @@ namespace OpenGlTutorial
         m_vertexVec            .reserve(RESERVE_SIZE);
         m_textureVec           .reserve(RESERVE_SIZE);
         m_normalVec            .reserve(RESERVE_SIZE);
-        m_triFaceVec           .reserve(RESERVE_SIZE);
-        m_non_triangular_faces .reserve(RESERVE_SIZE);
+        m_triangular_faces           .reserve(RESERVE_SIZE);
+        m_polygonal_faces .reserve(RESERVE_SIZE);
     }
    
     std::shared_ptr<MeshData> ObjParser::parse( const std::filesystem::path& mesh_path )
@@ -77,6 +77,8 @@ namespace OpenGlTutorial
         /*
             Create Mesh Data
         */ 
+        summarize_mesh();
+
         construct_mesh_data();
 
         //
@@ -116,7 +118,6 @@ namespace OpenGlTutorial
 
             try
             {
-
                 if( line_words.size() == 0 )
                 {
                     continue;
@@ -152,8 +153,8 @@ namespace OpenGlTutorial
         m_vertexVec            .reserve( m_num_geo_vert  );
         m_textureVec           .reserve( m_num_text_vert );
         m_normalVec            .reserve( m_num_norm_vert );
-        m_triFaceVec           .reserve( m_num_faces );
-        m_non_triangular_faces .reserve( m_num_faces );
+        m_triangular_faces           .reserve( m_num_faces );
+        m_polygonal_faces .reserve( m_num_faces );
     }
     
     /*
@@ -244,7 +245,7 @@ namespace OpenGlTutorial
         m_vertexVec.shrink_to_fit();
         m_normalVec.shrink_to_fit();
         m_textureVec.shrink_to_fit();
-        m_triFaceVec.shrink_to_fit();
+        m_triangular_faces.shrink_to_fit();
     }
 
     /*
@@ -254,7 +255,7 @@ namespace OpenGlTutorial
     */
     void ObjParser::triangularize_faces()
     {
-        for (auto& face : m_non_triangular_faces)
+        for (auto& face : m_polygonal_faces)
         {
             // Triangularize Faces
         }
@@ -267,8 +268,8 @@ namespace OpenGlTutorial
 
 
         // std::vector<MeshVertex> m_meshVertexVec {}; // Vector of structs that store raw mesh vertex data
-        // m_meshVertexVec.reserve(m_triFaceVec.size());
-        // for ( auto face : m_triFaceVec )
+        // m_meshVertexVec.reserve(m_triangular_faces.size());
+        // for ( auto face : m_triangular_faces )
         // {
         //     size_t vertIdx = 0;
         //     size_t textIdx = 0; 

@@ -33,15 +33,13 @@
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 
-// assimp
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
-
 // engine
 #include "engine_interfaces.hpp"
 #include "MeshData.hpp"
 #include "MeshTypes.hpp"
+
+// local 
+#include "obj_types.hpp"
 
 
 namespace OpenGlTutorial
@@ -80,8 +78,11 @@ namespace OpenGlTutorial
             std::cout << std::format("Num Vertex Lines: {}", m_vertexVec.size()) << std::endl;
             std::cout << std::format("Num Normal Lines: {}", m_normalVec.size()) << std::endl;
             std::cout << std::format("Num Texture Lines: {}", m_textureVec.size()) << std::endl;
-            std::cout << std::format("Num Triangular Face Lines: {}", m_triFaceVec.size()) << std::endl;
-            std::cout << std::format("Num Non-Triangular Face Lines: {}", m_non_triangular_faces.size()) << std::endl;
+            std::cout << std::format("Num Triangular Face Lines: {}", m_triangular_faces.size()) << std::endl;
+            std::cout << std::format("Num Non-Triangular Face Lines: {}", m_polygonal_faces.size()) << std::endl;
+
+            std::cout << "#############################" << std::endl;
+            std::cout << std::format("FACE INDICES: {}", m_faceIdx ) << std::endl;
         }
 
         static inline float string_to_float ( const std::string& input  )
@@ -170,40 +171,33 @@ namespace OpenGlTutorial
             {
                 throw std::runtime_error( "ObjParser::parse_face_element(): Cannot Parse face with <3 vertices!" );
             }
-            else if ( num_face_verts == 3 ) 
-            {
-                // auto to_optional_index = [](const std::string& s) -> std::optional<size_t> {
-                //         if (s.empty()) return std::nullopt;
-                //         try {
-                //             return std::stoul(s);
-                //         } catch (...) {
-                //             return std::nullopt;
-                //         }
-                //     };
 
-                // // Record Simple Triangular Face
-                // for( std::string element : line_words)
-                //     {
-                //         std::vector<std::string> tokens = split(element, '/');
-                //         std::array<std::optional<size_t>,3> face;
+             // Create Face Object
+            ObjMesh::ObjFace face;
 
-                //         size_t j = 0; 
-                //         for(auto token : tokens)
-                //         {
-                //             face[j] = to_optional_index(token);
-                //             j++;
-                //         }
+            // Iterate Over Each Vertex Definition String
+            for(std::string& ident  : space_delim_line)
+            {  
+                // Extract V, VT, VN data from string
+                ObjMesh::FaceVertData face_vert_data = parse_face_string( ident );
 
-                //         m_triFaceVec.push_back(face);
-                //     }
-                //     m_faceIdx++;
+                // face_vert_data.print_data();
+                    
+                face.insert_face_data( face_vert_data );
+            }
+
+             // Append Face to Triangular or Polygonal Faces Vectors
+            if( num_face_verts == 3 )
+            {    
+                face.print();
+                m_triangular_faces.push_back( face );
             }
             else 
             {
-                // > 3 Need to triangularize 
-                triangulation_required = true;
-
+                m_polygonal_faces.push_back( face );
             }
+
+            m_faceIdx++;
         }
 
         void parse_group_element( std::deque<std::string>& space_delim_line )
@@ -220,6 +214,55 @@ namespace OpenGlTutorial
 
         void data_extraction_pass( const std::filesystem::path& mesh_path );
 
+        ObjMesh::FaceVertData parse_face_string( std::string& identifier )
+        {
+            // Parsing State Machine Initialization
+            ObjMesh::FaceParsingState state = ObjMesh::FaceParsingState::VERT;
+
+            // Temporary Storage Variables
+            int geo = 0; 
+            std::optional<int> text = std::nullopt;
+            std::optional<int> norm = std::nullopt;
+
+            // Temporary Parsing Variable
+            std::string temp = "";
+
+            std::vector<size_t> seperator_indices; 
+
+            // Iterate char-by-char
+            for( auto c : identifier ) 
+            {
+                if( c == '/' )
+                {
+                    seperator_indices.push_back( c );
+                }
+            }
+            seperator_indices.shrink_to_fit();
+
+            if( seperator_indices.empty() )
+            {
+                geo = std::stoi( identifier );
+            }
+            else 
+            {
+                // V/VT
+                if( seperator_indices.size() == 1 )
+                {
+                    geo  = std::stoi( identifier.substr( 0, seperator_indices[0] ) );
+                    text = std::stoi( identifier.substr( seperator_indices[0], identifier.size() ) );
+                }
+                // V/VT/VN
+                else if ( seperator_indices.size() == 2 )
+                {
+                    geo  = std::stoi( identifier.substr( 0, seperator_indices[0] ) );
+                    text = std::stoi( identifier.substr( seperator_indices[0], seperator_indices[1] ) );
+                    norm = std::stoi( identifier.substr( seperator_indices[1], identifier.size() ) );
+                }
+            }
+
+            return ObjMesh::FaceVertData( geo, text, norm );
+        }
+
         void triangularize_faces();
 
         void construct_mesh_data();
@@ -232,11 +275,11 @@ namespace OpenGlTutorial
 
         size_t m_nonTriFaceIdx {0};
         
-        std::vector<std::array<float,3>>                m_vertexVec   {};
-        std::vector<std::array<float,2>>                m_textureVec  {};
-        std::vector<std::array<float,3>>                m_normalVec   {};
-        std::vector<std::array<std::optional<size_t>,3>> m_triFaceVec {};
-        std::vector<std::string>               m_non_triangular_faces {};
+        std::vector<std::array<float,3>> m_vertexVec            {};
+        std::vector<std::array<float,2>> m_textureVec           {};
+        std::vector<std::array<float,3>> m_normalVec            {};
+        std::vector<ObjMesh::ObjFace>    m_triangular_faces     {};
+        std::vector<ObjMesh::ObjFace>    m_polygonal_faces      {};
 
         std::vector<MeshVertex> vertices; 
         std::vector<size_t>     indices;
