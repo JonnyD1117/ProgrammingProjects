@@ -1,0 +1,10 @@
+# Ignore Build, Dependency, & Binary Directories
+bin/*
+build/*
+conan/*
+
+# Ignore Generated User Presets
+CMakeUserPresets.json
+.vscode/
+
+*.log
