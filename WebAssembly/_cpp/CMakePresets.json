@@ -1,55 +1,42 @@
 {
-    "version": 4,
-    "cmakeMinimumRequired": {
-      "major": 3,
-      "minor": 28,
-      "patch": 0
+  "version": 4,
+  "cmakeMinimumRequired": {
+    "major": 4,
+    "minor": 3,
+    "patch": 2
+  },
+  "include": [
+    "ConanPresets.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "default",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/bin"
+      },
+      "environment": {
+        "GTEST_COLOR": "1"
+      }
     },
-    "configurePresets": [
-      {
-        "name": "default",
-        "displayName": "Default ",
-        "description": "Default settings for both Debug & Release",
-        "generator": "Ninja",
-        "hidden": true,
-        "binaryDir": "${sourceDir}/build",
-        "cacheVariables": {
-          "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/bin",
-          "CMAKE_CXX_STANDARD": "23",
-          "CMAKE_CXX_STANDARD_REQUIRED": "ON",
-          "CMAKE_EXECUTABLE_SUFFIX":".html",
-          "CMAKE_TOOLCHAIN_FILE": "${sourceDir}/conan/conan_toolchain.cmake"
-
-        }
-      },
-      {
-        "name": "release",
-        "inherits": "default",
-        "displayName": "Release",
-        "description": "Use Conan toolchain and Release build type",
-        "cacheVariables": {
-          "CMAKE_BUILD_TYPE": "Release"
-        }
-      },
-      {
-        "name": "debug",
-        "inherits": "default",
-        "displayName": "Debug",
-        "description": "Use Conan toolchain and ebug build type",
-        "cacheVariables": {
-          "CMAKE_BUILD_TYPE": "Debug"
-        }
-      }
-    ],
-    "buildPresets": [
-      {
-        "name": "release",
-        "configurePreset": "release"
-      },
-      {
-        "name": "debug",
-        "configurePreset": "debug"
-      }
-    ]
-  }
-  
+    {
+      "name": "debug",
+      "inherits": ["conan-debug", "default"],
+      "displayName": "Debug Config"    },
+    {
+      "name": "release",
+      "inherits": ["conan-release", "default"],
+      "displayName": "Release Config"    }
+  ],
+  "buildPresets": [
+    {
+      "name": "debug",
+      "configurePreset": "debug"
+    },
+    {
+      "name": "release",
+      "configurePreset": "release"
+    }
+  ]
+}

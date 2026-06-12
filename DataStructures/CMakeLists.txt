@@ -1,6 +1,6 @@
-cmake_minimum_required( VERSION 3.28 )
+cmake_minimum_required( VERSION 4.3.2 )
 
-project( DataStructures_and_Algorithms )
+project( DataStructures_and_Algorithms LANGUAGES CXX)
 
 # Option to turn on ASan
 option(ENABLE_ASAN "Enable AddressSanitizer" OFF)

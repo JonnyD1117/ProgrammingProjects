@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 4.3.2)
 
 project(Atari800_Emulator LANGUAGES CXX)
 
@@ -6,7 +6,7 @@ project(Atari800_Emulator LANGUAGES CXX)
 enable_testing()
 
 find_package(GTest  REQUIRED)
-# find_package(Curses REQUIRED)
+find_package(Curses REQUIRED)
 
 # Add Project Sources & Tests
 add_subdirectory( src )

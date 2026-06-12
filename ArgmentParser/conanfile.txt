@@ -1,9 +1,0 @@
-[requires]
-gtest/1.16.0
-jsoncons/1.3.0
-yaml-cpp/0.8.0
-[generators]
-CMakeDeps
-CMakeToolchain
-[layout]
-cmake_layout

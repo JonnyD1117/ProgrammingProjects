@@ -23,11 +23,13 @@
     {
       "name": "debug",
       "inherits": ["conan-debug", "default"],
-      "displayName": "Debug Config"    },
+      "displayName": "Debug Config"
+    },
     {
       "name": "release",
       "inherits": ["conan-release", "default"],
-      "displayName": "Release Config"    }
+      "displayName": "Release Config"
+    }
   ],
   "buildPresets": [
     {
