@@ -15,7 +15,9 @@ venv:
 
 deps:
 	CONAN_SYSREQUIRES_SUDO=1 conan install . --output-folder=conan --build=missing \
-	-c tools.system.package_manager:mode=install -s build_type=$(CONAN_MODE); \
+	-c tools.system.package_manager:mode=install -s build_type=$(CONAN_MODE) \
+	-pr:h=./conan/profiles/clang_std23_$(CONAN_PROFILE_MODE) \
+    -pr:b=./conan/profiles/clang_std23_$(CONAN_PROFILE_MODE);
 
 config:
 	cmake --preset=$(CMAKE_MODE);

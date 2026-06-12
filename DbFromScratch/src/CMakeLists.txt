@@ -1,25 +1,19 @@
 #############################
 #   Source Compilation
 #############################
-add_subdirectory( db )
+# add_subdirectory( db )
 # add_subdirectory( network )
 # add_subdirectory( detection )
-
-
 
 #############################
 #   Executable Compilation
 #############################
 set(target main)
 
-set(sources 
-    main.cpp
-)
+set(sources main.cpp )
 
 # Set Project Libaries
-set(libs 
-
-)
+set(libs )
 
 # Create Executable
 add_executable(${target} ${sources} )
