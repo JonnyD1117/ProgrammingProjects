@@ -1,0 +1,9 @@
+# Ignore Build, Dependency, & Binary Directories
+bin/
+build/
+conan/build/
+
+# Ignore Generated User Presets
+CMakeUserPresets.json
+ConanPresets.json
+.vscode/

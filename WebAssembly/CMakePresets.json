@@ -1,0 +1,42 @@
+{
+  "version": 4,
+  "cmakeMinimumRequired": {
+    "major": 4,
+    "minor": 3,
+    "patch": 2
+  },
+  "include": [
+    "ConanPresets.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "default",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_RUNTIME_OUTPUT_DIRECTORY": "${sourceDir}/bin"
+      },
+      "environment": {
+        "GTEST_COLOR": "1"
+      }
+    },
+    {
+      "name": "debug",
+      "inherits": ["conan-debug", "default"],
+      "displayName": "Debug Config"    },
+    {
+      "name": "release",
+      "inherits": ["conan-release", "default"],
+      "displayName": "Release Config"    }
+  ],
+  "buildPresets": [
+    {
+      "name": "debug",
+      "configurePreset": "debug"
+    },
+    {
+      "name": "release",
+      "configurePreset": "release"
+    }
+  ]
+}
