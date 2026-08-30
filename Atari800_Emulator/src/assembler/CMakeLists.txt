@@ -3,6 +3,8 @@ set( target assembler )
 
 set( sources 
     assembler.cpp
+    lexer.cpp
+    symbol_table.cpp
 )
 
 set( libs 

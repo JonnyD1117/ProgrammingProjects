@@ -3,12 +3,14 @@ set( target unit_tests_6502_assembler )
 
 set( source
     main.cpp
-    test_6502_assembler_UT.cpp
+    test_assembler_lexer.cpp
+    test_assembler_parser.cpp
 )
 
 set( libs 
     GTest::gtest 
     GTest::gtest_main
+    assembler_lib
 )
 
 add_executable( ${target} ${source} )

@@ -17,15 +17,17 @@ Assembler Instructions
 
 */
 
+// local 
+#include "lexer.hpp"
 
 
 class Assembler
 {
     public:
-    Assembler()=default;
+    Assembler()=delete;
     ~Assembler()=default;
 
-    Assembler(const std::filesystem::path path) : m_inFile {path}
+    Assembler(const std::filesystem::path path) : m_inFile {path}, m_lexer{path}
     {
         if (!std::filesystem::exists(path))
         {
@@ -36,29 +38,14 @@ class Assembler
             throw std::runtime_error("Failed to open file: " + path.string());
         }
 
-        // Iterate over file line-by-line 
-        std::string tmp; 
-        while(std::getline(m_inFile, tmp))
-        {
-            
-            // Find first non-whitespace character in line
-            auto it = std::find_if(tmp.begin(), tmp.end(), [](unsigned char ch){ return !std::isspace(ch); });
+        // Tokenize File Input
+        m_lexer.processToken();
 
-            // If line begins with comment symbol ;
-            if( *it == ';') { continue; }
+        // Parse Tokens
+        // m_parser.()
 
-            std::string line (it, tmp.end());
-
-            // parse each line
-            for (unsigned char ch : line)
-            {   
-                // If Line 
-                if ( ch == ';') { break; }
-
-                std::cout << ch;
-            }
-            std::cout << std::endl;
-        }
+        // 
+     
     }
 
     private:
@@ -67,5 +54,6 @@ class Assembler
     std::ofstream m_outFile;
 
     std::uint16_t m_currPC;
-    
+
+    Lexer m_lexer;
 };

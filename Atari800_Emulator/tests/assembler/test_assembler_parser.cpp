@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-TEST(TestAssemblerTest, TestDummyAssembler)
+TEST(Test6502Assembler, TestParser)
 {
     EXPECT_TRUE(true);
 }

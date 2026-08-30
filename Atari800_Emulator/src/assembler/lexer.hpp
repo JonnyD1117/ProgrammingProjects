@@ -9,6 +9,19 @@
 #include <iostream>
 #include <string>
 #include <cctype>
+#include <vector>
+
+
+// IDENTIFIER     LOOP
+// INSTRUCTION    LDA
+// REGISTER       X
+// NUMBER         $FF, %10101010, 42
+// STRING         "hello"
+// CHARACTER      'A'          (if your dialect supports it)
+// PUNCTUATION    # , ( ) :
+// OPERATOR       + - *
+// COMMENT        ; ...
+// NEWLINE
 
 
 enum class SymbolTypes
@@ -21,6 +34,7 @@ enum class SymbolTypes
     COMMENT,
 };
 
+
 struct Token
 {
  SymbolTypes m_type {SymbolTypes::INVALID};
@@ -31,57 +45,72 @@ struct Token
 class Lexer
 {
     public: 
-    Lexer( const std::filesystem::path& text_file) : m_file{ text_file }, m_ifile_stream{text_file}
+    Lexer( const std::filesystem::path& text_file) : m_file{ text_file }, m_ifile_stream{text_file} {}
+    Lexer()=delete;
+
+    Token nextToken();
+
+    Token processToken();
+
+    private: 
+
+    void handle_begin_file(char next_char)
     {
-
-    }
-
-    Token nextToken()
-    {
-        return processToken();
-    }
-
-    private:
-    Token processToken()
-    {
-        // Ignore comments 
-
-        // handle instruction 
-
-        // handle variable 
-
-        // handle label
-
-        // handle directive
-
-        // Iterate over file line-by-line 
-        std::string tmp; 
-        while(std::getline(m_ifile_stream, tmp))
+        if( next_char == ' ' )
         {
-            
-            // Find first non-whitespace character in line
-            auto it = std::find_if(tmp.begin(), tmp.end(), [](unsigned char ch){ return !std::isspace(ch); });
+            m_state = LexerState::SPACE;
+        }
+        else if (next_chr == ';')
+        {
+            m_state = LexerState::COMMENT;
+        }
+        else if (next_chr == '.')
+        {
+            m_state = LexerState::DIRECTIVE;
+            m_temp += '.';
 
-            // If line begins with comment symbol ;
-            if( *it == ';') { continue; }
+        }
+        else
+        {
 
-            std::string line (it, tmp.end());
-
-            // parse each line
-            for (unsigned char ch : line)
-            {   
-                // If Line 
-                if ( ch == ';') { break; }
-
-                std::cout << ch;
-            }
-            std::cout << std::endl;
         }
     }
 
-    private: 
-    std::filesystem::path m_file;
-    std::ifstream m_ifile_stream;
+    void handle_character( char next_char )
+    {
+        if ( next_char == ' ' )
+        {
+            // End of INDENTIFIER, directive, label
+        }
+        else if (next_char == ';')
+        {
+            // End of INDENTIFIER/Label/Directive 
+            // beginning of a commennt 
+            m_state = LexerState::COMMENT;
+        }
+    }
 
-    Token m_token; 
+    void consume(char next_char); 
+
+    enum class LexerState
+    {
+        START=0,
+        SPACE,
+        COMMENT,
+        DIRECTIVE,
+        END_OF_LINE,
+        INDENTIFIER,
+        CHARACTER,
+        LABEL,
+    };
+
+    std::string m_temp           {""};
+
+    std::filesystem::path m_file {};
+    std::ifstream m_ifile_stream {};
+
+    LexerState m_state           {LexerState::START};
+    Token m_token                {}; 
+    Token m_prev_token           {};
+    std::vector<Token> m_tokens  {};
 };
