@@ -1,3 +1,3 @@
 
 add_subdirectory( assembler )
-add_subdirectory( emulator  )
+# add_subdirectory( emulator  )
