@@ -1,17 +1,9 @@
-.PHONY: deps, config, build, clean  test, test_gdb, run, venv run_gdb, site, serve, docs, venv
+.PHONY: deps config build clean test test_gdb
 
 # Compilation Mode: (release/debug)
 CMAKE_MODE ?=debug
 CONAN_MODE := $(shell echo $(CMAKE_MODE) | sed 's/./\U&/')
-
-venv:
-	@if [ ! -d .venv ]; then \
-		echo "Creating virtual environment..."; \
-		python3 -m venv .venv; \
-		bash -c "source .venv/bin/activate && pip install -r requirements.txt" \
-	else \
-		echo "Virtual environment already exists."; \
-	fi
+CONAN_PROFILE_MODE  = $(shell echo "$(CONAN_MODE)" | tr 'A-Z' 'a-z')
 
 deps:
 	CONAN_SYSREQUIRES_SUDO=1 conan install . --output-folder=conan --build=missing \
@@ -20,34 +12,19 @@ deps:
     -pr:b=./conan/profiles/clang_std23_$(CONAN_PROFILE_MODE);
 
 config:
-	cmake --preset=$(CMAKE_MODE);
+	cmake --preset=$(CMAKE_MODE)
 
 build: config
-	cmake --build ./build --preset=$(CMAKE_MODE); 
-
-run:
-	./bin/my_app
-
-run_gdb: 
-	gdb ./bin/my_app
+	cmake --build --preset=$(CMAKE_MODE)
 
 test:
-	cd ./build && ctest
+	./bin/unit_tests
 
 test_gdb:
 	gdb ./bin/unit_tests
 
 clean:
-	rm -rf ./bin/*
+	rm -rf ./bin/* 
 	rm -rf ./build/*
-	rm -rf ./conan/*
-	rm -rf .venv/
-
-site:
-	firefox ./docs/.site/index.html
-
-docs: venv
-	bash -c "source .venv/bin/activate && mkdocs build"
-
-serve:
-	bash -c "source .venv/bin/activate && mkdocs serve"
+	rm -rf ./conan/build
+	rm -f ConanPresets.json

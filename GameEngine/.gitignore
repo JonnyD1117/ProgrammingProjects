@@ -1,7 +1,8 @@
 # Ignore Build, Dependency, & Binary Directories
 bin/*
 build/*
-conan/
+build/.*
+conan/build
 
 # Ignore Generated User Presets
 CMakeUserPresets.json
