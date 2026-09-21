@@ -41,6 +41,11 @@ class Assembler
         // Tokenize File Input
         m_lexer.processToken();
 
+        for( auto token : m_lexer.getTokenList())
+        {
+            token.print();
+        }
+
         // Parse Tokens
         // m_parser.()
 
